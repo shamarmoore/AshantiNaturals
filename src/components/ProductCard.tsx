@@ -25,7 +25,6 @@ export default function ProductCard({
   length,
   inStock,
   texture,
-  method,
 }: ProductCardProps) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
