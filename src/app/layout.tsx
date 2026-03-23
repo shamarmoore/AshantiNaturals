@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/components/Providers";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import LayoutShell from "@/components/LayoutShell";
 
 export const metadata: Metadata = {
   title: "Ashanti Naturals | Premium Human Hair Wigs",
@@ -19,9 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans antialiased bg-stone-50 text-stone-900 min-h-screen flex flex-col">
         <Providers>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <LayoutShell>{children}</LayoutShell>
         </Providers>
       </body>
     </html>
