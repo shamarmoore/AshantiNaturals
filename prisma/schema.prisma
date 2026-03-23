@@ -59,7 +59,10 @@ model Product {
   description String
   price       Float
   image       String      @default("")
+  images      String      @default("[]")
   category    String      @default("Wig")
+  texture     String      @default("")
+  method      String      @default("")
   length      String      @default("")
   color       String      @default("")
   inStock     Boolean     @default(true)
