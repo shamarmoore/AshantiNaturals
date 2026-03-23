@@ -1,0 +1,138 @@
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { prisma } from "@/lib/prisma";
+import Link from "next/link";
+
+export const dynamic = "force-dynamic";
+
+export default async function AdminProductsPage() {
+  const session = await auth();
+
+  if (!session?.user || session.user.role !== "admin") {
+    redirect("/");
+  }
+
+  const products = await prisma.product.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-serif font-bold text-stone-800">
+          Manage Products
+        </h1>
+        <Link
+          href="/admin/products/new"
+          className="bg-amber-600 text-white px-6 py-2 rounded-md hover:bg-amber-700 transition-colors"
+        >
+          + Add New Product
+        </Link>
+      </div>
+
+      {products.length === 0 ? (
+        <div className="text-center py-16 bg-white rounded-lg border border-stone-200">
+          <p className="text-stone-500 text-lg mb-4">No products yet</p>
+          <Link
+            href="/admin/products/new"
+            className="text-amber-600 hover:text-amber-700 font-medium"
+          >
+            Add your first product →
+          </Link>
+        </div>
+      ) : (
+        <div className="bg-white rounded-lg border border-stone-200 overflow-hidden">
+          <table className="w-full">
+            <thead className="bg-stone-50 border-b border-stone-200">
+              <tr>
+                <th className="text-left px-6 py-3 text-sm font-medium text-stone-600">
+                  Product
+                </th>
+                <th className="text-left px-6 py-3 text-sm font-medium text-stone-600">
+                  Category
+                </th>
+                <th className="text-left px-6 py-3 text-sm font-medium text-stone-600">
+                  Price
+                </th>
+                <th className="text-left px-6 py-3 text-sm font-medium text-stone-600">
+                  Status
+                </th>
+                <th className="text-right px-6 py-3 text-sm font-medium text-stone-600">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-stone-200">
+              {products.map((product) => (
+                <tr key={product.id} className="hover:bg-stone-50">
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="font-medium text-stone-800">
+                        {product.name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-stone-600">
+                    {product.category}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-stone-800 font-medium">
+                    ${product.price.toFixed(2)}
+                  </td>
+                  <td className="px-6 py-4">
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full ${
+                        product.inStock
+                          ? "bg-green-50 text-green-700"
+                          : "bg-red-50 text-red-700"
+                      }`}
+                    >
+                      {product.inStock ? "In Stock" : "Sold Out"}
+                    </span>
+                    {product.featured && (
+                      <span className="text-xs px-2 py-1 rounded-full bg-amber-50 text-amber-700 ml-1">
+                        Featured
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <Link
+                      href={`/admin/products/${product.id}/edit`}
+                      className="text-amber-600 hover:text-amber-700 text-sm font-medium mr-4"
+                    >
+                      Edit
+                    </Link>
+                    <DeleteButton productId={product.id} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DeleteButton({ productId }: { productId: string }) {
+  return (
+    <form
+      action={async () => {
+        "use server";
+        const session = await auth();
+        if (session?.user?.role === "admin") {
+          await prisma.product.delete({ where: { id: productId } });
+        }
+        const { redirect: redir } = await import("next/navigation");
+        redir("/admin/products");
+      }}
+      className="inline"
+    >
+      <button
+        type="submit"
+        className="text-red-600 hover:text-red-700 text-sm font-medium"
+      >
+        Delete
+      </button>
+    </form>
+  );
+}
