@@ -12,6 +12,8 @@ interface ProductCardProps {
   category: string;
   length: string;
   inStock: boolean;
+  texture?: string;
+  method?: string;
 }
 
 export default function ProductCard({
@@ -22,6 +24,8 @@ export default function ProductCard({
   category,
   length,
   inStock,
+  texture,
+  method,
 }: ProductCardProps) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -65,12 +69,25 @@ export default function ProductCard({
               </span>
             </div>
           )}
+          {/* Quick View overlay */}
+          {inStock && (
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <span className="bg-white text-stone-800 px-4 py-2 rounded-full text-sm font-medium shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                Quick View
+              </span>
+            </div>
+          )}
         </div>
         <div className="p-4">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex flex-wrap items-center gap-1.5 mb-1">
             <span className="text-xs text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
               {category}
             </span>
+            {texture && (
+              <span className="text-xs text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full">
+                {texture}
+              </span>
+            )}
             {length && (
               <span className="text-xs text-stone-500">{length}</span>
             )}

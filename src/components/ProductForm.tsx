@@ -14,6 +14,8 @@ interface ProductFormProps {
     category: string;
     length: string;
     color: string;
+    texture?: string;
+    method?: string;
     inStock: boolean;
     featured: boolean;
   };
@@ -32,6 +34,8 @@ export default function ProductForm({ product }: ProductFormProps) {
     category: product?.category || "Wig",
     length: product?.length || "",
     color: product?.color || "",
+    texture: product?.texture || "",
+    method: product?.method || "",
     inStock: product?.inStock ?? true,
     featured: product?.featured ?? false,
   });
@@ -195,6 +199,45 @@ export default function ProductForm({ product }: ProductFormProps) {
             className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             placeholder="e.g., Natural Black"
           />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-stone-700 mb-1">
+            Texture
+          </label>
+          <select
+            value={form.texture}
+            onChange={(e) => setForm({ ...form, texture: e.target.value })}
+            className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          >
+            <option value="">Select texture…</option>
+            <option value="Straight">Straight</option>
+            <option value="Body Wave">Body Wave</option>
+            <option value="Deep Wave">Deep Wave</option>
+            <option value="Loose Wave">Loose Wave</option>
+            <option value="Kinky Curly">Kinky Curly</option>
+            <option value="Water Wave">Water Wave</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-stone-700 mb-1">
+            Method
+          </label>
+          <select
+            value={form.method}
+            onChange={(e) => setForm({ ...form, method: e.target.value })}
+            className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          >
+            <option value="">Select method…</option>
+            <option value="Sew-In">Sew-In</option>
+            <option value="Tape-In">Tape-In</option>
+            <option value="Clip-In">Clip-In</option>
+            <option value="Glueless Wig">Glueless Wig</option>
+            <option value="Lace Front">Lace Front</option>
+            <option value="Full Lace">Full Lace</option>
+          </select>
         </div>
       </div>
 
