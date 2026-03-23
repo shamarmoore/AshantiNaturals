@@ -39,7 +39,7 @@ export async function PUT(
       data: {
         name: body.name,
         description: body.description,
-        price: body.price !== undefined ? parseFloat(body.price) : undefined,
+        price: body.price !== undefined ? parseFloat(String(body.price)) : undefined,
         image: body.image,
         category: body.category,
         length: body.length,

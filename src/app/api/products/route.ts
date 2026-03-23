@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       data: {
         name,
         description,
-        price: parseFloat(price),
+        price: parseFloat(String(price)),
         image: image || "",
         category: category || "Wig",
         length: length || "",
