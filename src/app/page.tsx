@@ -1,75 +1,100 @@
 import { prisma } from "@/lib/prisma";
-import ProductCard from "@/components/ProductCard";
+import ProductCarousel from "@/components/ProductCarousel";
+import ShopByMethod from "@/components/ShopByMethod";
+import TextureMatchTool from "@/components/TextureMatchTool";
+import ReviewsSection from "@/components/ReviewsSection";
+import InstagramGallery from "@/components/InstagramGallery";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const featuredProducts = await prisma.product.findMany({
     where: { featured: true, inStock: true },
-    take: 4,
+    take: 8,
     orderBy: { createdAt: "desc" },
   });
 
-  const allProducts = await prisma.product.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  const carouselProducts = featuredProducts.map((p) => ({
+    id: p.id,
+    name: p.name,
+    price: p.price,
+    image: p.image,
+    category: p.category,
+    texture: p.texture,
+  }));
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-stone-800 via-stone-900 to-stone-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-          <h1 className="text-4xl md:text-6xl font-serif font-bold mb-4">
+      {/* Hero Banner */}
+      <section className="relative bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-600/20 via-transparent to-transparent" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-36 text-center">
+          <p className="text-amber-400 uppercase tracking-[0.25em] text-sm font-medium mb-4">
+            Premium Human Hair
+          </p>
+          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
             Ashanti Naturals
           </h1>
-          <p className="text-lg md:text-xl text-stone-300 max-w-2xl mx-auto mb-8">
-            Premium human hair wigs crafted for the modern woman. Discover your
-            perfect look with our curated collection.
+          <p className="text-lg md:text-xl text-stone-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Discover luxurious, handcrafted wigs designed for the modern woman.
+            Effortless beauty that moves with you.
           </p>
-          <a
-            href="#shop"
-            className="inline-block bg-amber-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-amber-700 transition-colors"
-          >
-            Shop Collection
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/shop?featured=true"
+              className="inline-block bg-amber-600 text-white px-8 py-3.5 rounded-md text-lg font-medium hover:bg-amber-500 transition-colors shadow-lg shadow-amber-600/25"
+            >
+              Shop Bestsellers
+            </a>
+            <a
+              href="#texture-match"
+              className="inline-block border border-white/30 text-white px-8 py-3.5 rounded-md text-lg font-medium hover:bg-white/10 transition-colors"
+            >
+              Find Your Texture
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* Featured Products */}
-      {featuredProducts.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-800 mb-8 text-center">
-            Featured Styles
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
+      {/* Shop by Method */}
+      <section className="bg-white">
+        <ShopByMethod />
+      </section>
+
+      {/* Featured / Bestselling Products Carousel */}
+      {carouselProducts.length > 0 && (
+        <section className="bg-stone-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-800 mb-2 text-center">
+              Bestselling Styles
+            </h2>
+            <p className="text-stone-500 text-center mb-10 max-w-xl mx-auto">
+              Our most-loved wigs, handpicked by customers just like you.
+            </p>
+            <ProductCarousel products={carouselProducts} />
           </div>
         </section>
       )}
 
-      {/* All Products */}
-      <section
-        id="shop"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
-      >
-        <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-800 mb-8 text-center">
-          Our Collection
-        </h2>
-        {allProducts.length === 0 ? (
-          <div className="text-center py-16">
-            <p className="text-stone-500 text-lg">
-              No products available yet. Check back soon!
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {allProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
-          </div>
-        )}
+      {/* Find Your Texture Match */}
+      <section id="texture-match" className="bg-white">
+        <TextureMatchTool />
+      </section>
+
+      {/* Customer Reviews */}
+      <section className="bg-stone-50">
+        <ReviewsSection />
+      </section>
+
+      {/* Instagram Gallery */}
+      <section className="bg-amber-50/10">
+        <InstagramGallery />
+      </section>
+
+      {/* Newsletter Signup */}
+      <section className="bg-stone-50">
+        <NewsletterSignup />
       </section>
 
       {/* Trust Section */}

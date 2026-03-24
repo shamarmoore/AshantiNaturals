@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { name, description, price, image, category, length, color, inStock, featured } = body;
+    const { name, description, price, image, images, category, length, color, texture, method, inStock, featured } = body;
 
     if (!name || !description || price == null) {
       return NextResponse.json(
@@ -39,9 +39,12 @@ export async function POST(request: NextRequest) {
         description,
         price: parseFloat(String(price)),
         image: image || "",
+        images: images || "[]",
         category: category || "Wig",
         length: length || "",
         color: color || "",
+        texture: texture || "",
+        method: method || "",
         inStock: inStock ?? true,
         featured: featured ?? false,
       },

@@ -1,0 +1,155 @@
+import Link from "next/link";
+
+export const metadata = {
+  title: "About Us | Ashanti Naturals",
+  description:
+    "Learn about Ashanti Naturals — our story, mission, and commitment to premium Afrocentric beauty.",
+};
+
+export default function AboutPage() {
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* Breadcrumb */}
+      <nav className="text-sm text-stone-500 mb-8">
+        <Link href="/" className="hover:text-amber-700 transition-colors">
+          Home
+        </Link>
+        <span className="mx-2">/</span>
+        <span className="text-stone-800">About Us</span>
+      </nav>
+
+      {/* Hero section */}
+      <section className="text-center max-w-3xl mx-auto mb-16">
+        <h1 className="text-4xl md:text-5xl font-serif font-bold text-stone-900 mb-6">
+          Our Story
+        </h1>
+        <p className="text-lg text-stone-600 leading-relaxed">
+          Ashanti Naturals was born from a deep passion for celebrating natural
+          beauty and empowering women of all backgrounds to feel confident and
+          radiant. We believe that premium hair shouldn&apos;t be a luxury — it
+          should be accessible to everyone who seeks quality, authenticity, and
+          style.
+        </p>
+      </section>
+
+      {/* Mission section */}
+      <section className="bg-amber-50 rounded-2xl p-8 md:p-12 mb-16">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-900 mb-4">
+            Our Mission
+          </h2>
+          <p className="text-stone-700 leading-relaxed text-lg">
+            To provide premium-quality human hair products that honor the rich
+            heritage of Afrocentric beauty while embracing modern style and
+            innovation. We are dedicated to helping every customer find hair
+            that looks natural, feels luxurious, and inspires confidence.
+          </p>
+        </div>
+      </section>
+
+      {/* Values section */}
+      <section className="mb-16">
+        <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-900 text-center mb-10">
+          What We Stand For
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="text-center p-6 rounded-xl border border-stone-200 bg-white">
+            <div className="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg
+                className="w-7 h-7 text-amber-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-stone-900 mb-2">
+              Premium Quality
+            </h3>
+            <p className="text-stone-600 text-sm leading-relaxed">
+              Every product is handpicked and quality-tested to ensure it meets
+              the highest standards. We use only 100% virgin human hair sourced
+              ethically and crafted with care.
+            </p>
+          </div>
+
+          <div className="text-center p-6 rounded-xl border border-stone-200 bg-white">
+            <div className="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg
+                className="w-7 h-7 text-amber-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-stone-900 mb-2">
+              Inclusivity
+            </h3>
+            <p className="text-stone-600 text-sm leading-relaxed">
+              Beauty has no single definition. Our diverse range of textures,
+              lengths, and styles is designed to celebrate every woman —
+              regardless of her background, skin tone, or hair type.
+            </p>
+          </div>
+
+          <div className="text-center p-6 rounded-xl border border-stone-200 bg-white">
+            <div className="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg
+                className="w-7 h-7 text-amber-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-stone-900 mb-2">
+              Afrocentric Beauty
+            </h3>
+            <p className="text-stone-600 text-sm leading-relaxed">
+              Rooted in the proud traditions of the Ashanti people, our brand
+              honors African heritage. We draw inspiration from the richness of
+              Black beauty culture to create products that feel authentic and
+              empowering.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA section */}
+      <section className="text-center bg-stone-900 text-white rounded-2xl p-8 md:p-12">
+        <h2 className="text-2xl md:text-3xl font-serif font-bold mb-4">
+          Ready to Find Your Perfect Look?
+        </h2>
+        <p className="text-stone-300 mb-6 max-w-xl mx-auto">
+          Explore our curated collection of premium wigs, bundles, and
+          extensions crafted for queens like you.
+        </p>
+        <Link
+          href="/shop"
+          className="inline-block bg-amber-600 text-white px-8 py-3 rounded-md font-medium hover:bg-amber-700 transition-colors"
+        >
+          Shop Now
+        </Link>
+      </section>
+    </div>
+  );
+}
