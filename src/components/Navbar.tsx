@@ -36,16 +36,15 @@ const megaMenuSections = [
   {
     title: "By Category",
     links: [
-      { label: "Wigs", href: "/shop?category=wigs" },
-      { label: "Bundles", href: "/shop?category=bundles" },
-      { label: "Closures", href: "/shop?category=closures" },
-      { label: "Frontals", href: "/shop?category=frontals" },
+      { label: "Wigs", href: "/shop?category=wig" },
+      { label: "Bundles", href: "/shop?category=bundle" },
+      { label: "Closures", href: "/shop?category=closure" },
+      { label: "Frontals", href: "/shop?category=frontal" },
     ],
   },
 ] as const;
 
 const topNavLinks = [
-  { label: "New Arrivals", href: "/shop?sort=newest" },
   { label: "Bestsellers", href: "/shop?featured=true" },
   { label: "Sale", href: "/shop?sale=true" },
   { label: "About Us", href: "/about" },
@@ -134,13 +133,13 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
   };
 
   return (
-    <nav className="bg-white shadow-sm border-b border-stone-200 sticky top-0 z-40">
+    <nav className="bg-white shadow-sm border-b-2 border-blush-200 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* ---- Logo ---- */}
           <Link href="/" className="flex-shrink-0">
-            <span className="text-2xl font-serif font-bold text-stone-800">
-              Ashanti Naturals
+            <span className="text-2xl font-logo font-semibold text-taupe-800 tracking-[0.15em] uppercase">
+              Luméira
             </span>
           </Link>
 
@@ -154,7 +153,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
             {session?.user?.role === "admin" && (
               <Link
                 href="/admin/products"
-                className="text-sm text-stone-600 hover:text-stone-900 transition-colors"
+                className="text-sm text-taupe-600 hover:text-taupe-900 transition-colors"
               >
                 Admin
               </Link>
@@ -165,7 +164,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
               <div className="flex items-center space-x-3">
                 <Link
                   href="/account"
-                  className="text-stone-600 hover:text-stone-900 transition-colors"
+                  className="text-taupe-600 hover:text-taupe-900 transition-colors"
                   aria-label="Account"
                 >
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -174,7 +173,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
                 </Link>
                 <button
                   onClick={() => signOut()}
-                  className="text-sm text-stone-600 hover:text-stone-900 transition-colors"
+                  className="text-sm text-taupe-600 hover:text-taupe-900 transition-colors"
                 >
                   Sign Out
                 </button>
@@ -182,23 +181,21 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
             ) : (
               <button
                 onClick={() => signIn("google")}
-                className="bg-stone-800 text-white px-4 py-2 rounded-md text-sm hover:bg-stone-700 transition-colors"
+                className="bg-taupe-400 text-white px-4 py-2 rounded-sm text-sm hover:bg-taupe-500 transition-colors"
               >
                 Sign In
               </button>
             )}
-
-            {/* Cart icon */}
             <button
               onClick={handleCartClick}
-              className="relative text-stone-600 hover:text-stone-900 transition-colors"
+              className="relative text-taupe-600 hover:text-taupe-900 transition-colors"
               aria-label="Open cart"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-amber-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-blush-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -209,20 +206,20 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
           <div className="flex md:hidden items-center space-x-3">
             <button
               onClick={handleCartClick}
-              className="relative text-stone-600 hover:text-stone-900 transition-colors"
+              className="relative text-taupe-600 hover:text-taupe-900 transition-colors"
               aria-label="Open cart"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-amber-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-blush-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
             </button>
             <button
-              className="text-stone-600 hover:text-stone-900"
+              className="text-taupe-600 hover:text-taupe-900"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
@@ -240,7 +237,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
       </div>
 
       {/* ---- Desktop secondary nav with mega menu ---- */}
-      <div className="hidden md:block border-t border-stone-100 bg-stone-50">
+      <div className="hidden md:block border-t border-taupe-100 bg-taupe-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-8 h-10 text-sm">
             {/* Shop with mega menu */}
@@ -251,7 +248,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
               onMouseLeave={closeShop}
             >
               <button
-                className="flex items-center space-x-1 text-stone-600 hover:text-stone-900 font-medium transition-colors"
+                className="flex items-center space-x-1 text-taupe-600 hover:text-taupe-900 font-medium transition-colors"
                 onClick={() => setShopOpen((prev) => !prev)}
                 onKeyDown={handleShopKeyDown}
                 aria-expanded={shopOpen}
@@ -271,14 +268,14 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
               {/* Mega menu panel */}
               {shopOpen && (
                 <div
-                  className="absolute left-0 top-full mt-0 w-[42rem] rounded-b-lg border border-stone-200 bg-white shadow-xl p-6 grid grid-cols-3 gap-6 z-50"
+                  className="absolute left-0 top-full mt-0 w-[42rem] rounded-b-lg border border-taupe-200 bg-white shadow-xl p-6 grid grid-cols-3 gap-6 z-50"
                   role="menu"
                   onMouseEnter={openShop}
                   onMouseLeave={closeShop}
                 >
                   {megaMenuSections.map((section) => (
                     <div key={section.title}>
-                      <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-3">
+                      <h3 className="text-xs font-semibold uppercase tracking-wider text-taupe-400 mb-3">
                         {section.title}
                       </h3>
                       <ul className="space-y-2" role="none">
@@ -286,7 +283,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
                           <li key={link.href} role="none">
                             <Link
                               href={link.href}
-                              className="block text-sm text-stone-700 hover:text-amber-700 hover:pl-1 transition-all"
+                              className="block text-sm text-taupe-700 hover:text-blush-700 hover:pl-1 transition-all"
                               role="menuitem"
                               onClick={() => setShopOpen(false)}
                             >
@@ -305,7 +302,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-stone-600 hover:text-stone-900 transition-colors ${
+                className={`text-taupe-600 hover:text-taupe-900 transition-colors ${
                   link.label === "Sale" ? "text-red-600 font-semibold hover:text-red-700" : ""
                 }`}
               >
@@ -318,7 +315,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
 
       {/* ---- Mobile menu ---- */}
       {menuOpen && (
-        <div className="md:hidden border-t border-stone-200 bg-white max-h-[80vh] overflow-y-auto">
+        <div className="md:hidden border-t border-taupe-200 bg-white max-h-[80vh] overflow-y-auto">
           <div className="px-4 py-3">
             {/* Mobile search */}
             <div className="mb-4 lg:hidden">
@@ -326,9 +323,9 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
             </div>
 
             {/* Shop collapsible section */}
-            <div className="border-b border-stone-100 pb-3 mb-3">
+            <div className="border-b border-taupe-100 pb-3 mb-3">
               <button
-                className="flex items-center justify-between w-full text-stone-800 font-medium py-2"
+                className="flex items-center justify-between w-full text-taupe-800 font-medium py-2"
                 onClick={() => setMobileShopOpen(!mobileShopOpen)}
                 aria-expanded={mobileShopOpen}
               >
@@ -347,7 +344,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
                 <div className="pl-3 space-y-4 mt-2">
                   {megaMenuSections.map((section) => (
                     <div key={section.title}>
-                      <h4 className="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">
+                      <h4 className="text-xs font-semibold uppercase tracking-wider text-taupe-400 mb-2">
                         {section.title}
                       </h4>
                       <ul className="space-y-1.5">
@@ -355,7 +352,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
                           <li key={link.href}>
                             <Link
                               href={link.href}
-                              className="block text-sm text-stone-600 hover:text-stone-900 py-0.5"
+                              className="block text-sm text-taupe-600 hover:text-taupe-900 py-0.5"
                               onClick={closeMobile}
                             >
                               {link.label}
@@ -370,7 +367,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
             </div>
 
             {/* Other nav links */}
-            <div className="space-y-1 border-b border-stone-100 pb-3 mb-3">
+            <div className="space-y-1 border-b border-taupe-100 pb-3 mb-3">
               {topNavLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -378,7 +375,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
                   className={`block py-2 text-sm ${
                     link.label === "Sale"
                       ? "text-red-600 font-semibold"
-                      : "text-stone-600 hover:text-stone-900"
+                      : "text-taupe-600 hover:text-taupe-900"
                   }`}
                   onClick={closeMobile}
                 >
@@ -391,7 +388,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
             {session?.user?.role === "admin" && (
               <Link
                 href="/admin/products"
-                className="block py-2 text-sm text-stone-600 hover:text-stone-900"
+                className="block py-2 text-sm text-taupe-600 hover:text-taupe-900"
                 onClick={closeMobile}
               >
                 Admin
@@ -402,12 +399,12 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
             <div className="pt-2">
               {session ? (
                 <div className="space-y-2">
-                  <span className="block text-sm text-stone-500">
+                    <span className="block text-sm text-taupe-500">
                     Signed in as {session.user?.name}
                   </span>
                   <button
                     onClick={() => signOut()}
-                    className="block text-sm text-stone-600 hover:text-stone-900"
+                    className="block text-sm text-taupe-600 hover:text-taupe-900"
                   >
                     Sign Out
                   </button>
@@ -415,7 +412,7 @@ export default function Navbar({ onCartOpen }: NavbarProps) {
               ) : (
                 <button
                   onClick={() => signIn("google")}
-                  className="w-full bg-stone-800 text-white px-4 py-2 rounded-md text-sm hover:bg-stone-700 transition-colors"
+                  className="w-full bg-taupe-400 text-white px-4 py-2 rounded-sm text-sm hover:bg-taupe-500 transition-colors"
                 >
                   Sign In
                 </button>

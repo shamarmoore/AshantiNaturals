@@ -41,6 +41,26 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
 
 const PRODUCTS_PER_PAGE = 12;
 
+/** Normalize a string to a comparable slug: "Sew-In" -> "sew-in", "Body Wave" -> "body-wave" */
+function toSlug(str: string): string {
+  return str.toLowerCase().replace(/\s+/g, "-");
+}
+
+/** Convert a URL slug like "body-wave" to title case "Body Wave" (for display) */
+function slugToTitle(slug: string): string {
+  return slug
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+/** Check if the product value matches any filter value (slug-normalized) */
+function matchesFilter(productValue: string, filterValues: string[]): boolean {
+  if (filterValues.length === 0) return true;
+  const pvSlug = toSlug(productValue);
+  return filterValues.some((f) => toSlug(f) === pvSlug);
+}
+
 function ShopPageContent() {
   const searchParams = useSearchParams();
 
@@ -51,11 +71,14 @@ function ShopPageContent() {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Initialize filters from URL search params
+  // Store raw URL values - matchesFilter normalizes both sides via toSlug()
   const [filters, setFilters] = useState<FilterState>(() => ({
     textures: searchParams.get("texture")
       ? [searchParams.get("texture")!]
       : [],
-    methods: searchParams.get("method") ? [searchParams.get("method")!] : [],
+    methods: searchParams.get("method")
+      ? [searchParams.get("method")!]
+      : [],
     categories: searchParams.get("category")
       ? [searchParams.get("category")!]
       : [],
@@ -70,6 +93,10 @@ function ShopPageContent() {
 
   const searchQuery = searchParams.get("q") || "";
   const featuredOnly = searchParams.get("featured") === "true";
+
+  // Once products load, resolve URL slug params to actual product data values
+  // so that FilterSidebar checkboxes appear correctly checked
+  const [filtersResolved, setFiltersResolved] = useState(false);
 
   // Fetch products
   useEffect(() => {
@@ -89,6 +116,28 @@ function ShopPageContent() {
     }
     fetchProducts();
   }, []);
+
+  // Resolve URL slug values to actual product data values for sidebar checkbox matching
+  useEffect(() => {
+    if (filtersResolved || products.length === 0) return;
+    const resolve = (slugValues: string[], productValues: string[]): string[] => {
+      if (slugValues.length === 0) return slugValues;
+      return slugValues.map((sv) => {
+        const match = productValues.find((pv) => toSlug(pv) === toSlug(sv));
+        return match ?? sv;
+      });
+    };
+    const textures = [...new Set(products.map((p) => p.texture))];
+    const methods = [...new Set(products.map((p) => p.method))];
+    const categories = [...new Set(products.map((p) => p.category))];
+    setFilters((prev) => ({
+      ...prev,
+      textures: resolve(prev.textures, textures),
+      methods: resolve(prev.methods, methods),
+      categories: resolve(prev.categories, categories),
+    }));
+    setFiltersResolved(true);
+  }, [products, filtersResolved]);
 
   // Reset to page 1 when filters/sort/search change
   useEffect(() => {
@@ -111,24 +160,31 @@ function ShopPageContent() {
     // Search filter
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      result = result.filter((p) => p.name.toLowerCase().includes(q));
+      result = result.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q) ||
+          p.texture.toLowerCase().includes(q) ||
+          p.method.toLowerCase().includes(q)
+      );
     }
 
-    // Sidebar filters
+    // Sidebar filters (case-insensitive matching)
     if (filters.textures.length > 0) {
-      result = result.filter((p) => filters.textures.includes(p.texture));
+      result = result.filter((p) => matchesFilter(p.texture, filters.textures));
     }
     if (filters.methods.length > 0) {
-      result = result.filter((p) => filters.methods.includes(p.method));
+      result = result.filter((p) => matchesFilter(p.method, filters.methods));
     }
     if (filters.categories.length > 0) {
-      result = result.filter((p) => filters.categories.includes(p.category));
+      result = result.filter((p) => matchesFilter(p.category, filters.categories));
     }
     if (filters.lengths.length > 0) {
-      result = result.filter((p) => filters.lengths.includes(p.length));
+      result = result.filter((p) => matchesFilter(p.length, filters.lengths));
     }
     if (filters.colors.length > 0) {
-      result = result.filter((p) => filters.colors.includes(p.color));
+      result = result.filter((p) => matchesFilter(p.color, filters.colors));
     }
     if (filters.priceRange) {
       result = result.filter(
@@ -183,18 +239,18 @@ function ShopPageContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-stone-50">
+      <div className="min-h-screen bg-taupe-50">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <div className="h-8 w-48 animate-pulse rounded bg-stone-200" />
-            <div className="mt-2 h-4 w-64 animate-pulse rounded bg-stone-200" />
+            <div className="h-8 w-48 animate-pulse rounded bg-taupe-200" />
+            <div className="mt-2 h-4 w-64 animate-pulse rounded bg-taupe-200" />
           </div>
           <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="aspect-square rounded-lg bg-stone-200" />
-                <div className="mt-3 h-4 w-3/4 rounded bg-stone-200" />
-                <div className="mt-2 h-4 w-1/2 rounded bg-stone-200" />
+                <div className="aspect-square rounded-lg bg-taupe-200" />
+                <div className="mt-3 h-4 w-3/4 rounded bg-taupe-200" />
+                <div className="mt-2 h-4 w-1/2 rounded bg-taupe-200" />
               </div>
             ))}
           </div>
@@ -205,13 +261,13 @@ function ShopPageContent() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-stone-50">
+      <div className="min-h-screen bg-taupe-50">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="rounded-lg border border-red-200 bg-red-50 p-8 text-center">
             <p className="text-red-700">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 rounded-lg bg-amber-700 px-6 py-2 text-sm font-medium text-white hover:bg-amber-800 transition-colors"
+              className="mt-4 rounded-lg bg-blush-700 px-6 py-2 text-sm font-medium text-white hover:bg-blush-800 transition-colors"
             >
               Try Again
             </button>
@@ -222,15 +278,27 @@ function ShopPageContent() {
   }
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen bg-taupe-50">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-stone-900 sm:text-3xl">
-            Shop All Products
+          <h1 className="text-2xl font-semibold text-taupe-900 sm:text-3xl">
+            {featuredOnly
+              ? "Bestsellers"
+              : filters.methods.length === 1
+                ? `${filters.methods[0]} Products`
+                : filters.textures.length === 1
+                  ? `${filters.textures[0]} Products`
+                  : filters.categories.length === 1
+                    ? `${filters.categories[0]}s`
+                    : searchQuery
+                      ? `Search: "${searchQuery}"`
+                      : "Shop All Products"}
           </h1>
-          <p className="mt-1 text-sm text-stone-500">
-            Discover our premium hair extensions and wigs
+          <p className="mt-1 text-sm text-taupe-500">
+            {featuredOnly
+              ? "Our most-loved styles, handpicked by customers"
+              : "Discover our premium hair extensions and wigs"}
           </p>
         </div>
 
@@ -238,7 +306,7 @@ function ShopPageContent() {
           {/* Mobile filter toggle */}
           <button
             onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
-            className="mb-4 flex w-full items-center justify-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors lg:hidden"
+            className="mb-4 flex w-full items-center justify-center gap-2 rounded-lg border border-taupe-300 bg-white px-4 py-2.5 text-sm font-medium text-taupe-700 hover:bg-taupe-50 transition-colors lg:hidden"
           >
             <svg
               className="h-5 w-5"
@@ -271,13 +339,13 @@ function ShopPageContent() {
           <div>
             {/* Toolbar: sort + product count */}
             <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-stone-600">
+              <p className="text-sm text-taupe-600">
                 Showing{" "}
-                <span className="font-medium text-stone-800">
+                <span className="font-medium text-taupe-800">
                   {showingFrom}–{showingTo}
                 </span>{" "}
                 of{" "}
-                <span className="font-medium text-stone-800">
+                <span className="font-medium text-taupe-800">
                   {filteredProducts.length}
                 </span>{" "}
                 products
@@ -286,7 +354,7 @@ function ShopPageContent() {
               <div className="flex items-center gap-2">
                 <label
                   htmlFor="sort-select"
-                  className="text-sm text-stone-600"
+                  className="text-sm text-taupe-600"
                 >
                   Sort by:
                 </label>
@@ -294,7 +362,7 @@ function ShopPageContent() {
                   id="sort-select"
                   value={sort}
                   onChange={(e) => setSort(e.target.value as SortOption)}
-                  className="rounded-lg border border-stone-300 bg-white px-3 py-1.5 text-sm text-stone-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
+                  className="rounded-lg border border-taupe-300 bg-white px-3 py-1.5 text-sm text-taupe-700 focus:border-blush-500 focus:ring-1 focus:ring-blush-500 focus:outline-none"
                 >
                   {SORT_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -313,9 +381,9 @@ function ShopPageContent() {
                 ))}
               </div>
             ) : (
-              <div className="rounded-lg border border-stone-200 bg-white px-6 py-16 text-center">
+              <div className="rounded-lg border border-taupe-200 bg-white px-6 py-16 text-center">
                 <svg
-                  className="mx-auto h-12 w-12 text-stone-300"
+                  className="mx-auto h-12 w-12 text-taupe-300"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -327,10 +395,10 @@ function ShopPageContent() {
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   />
                 </svg>
-                <h3 className="mt-4 text-base font-medium text-stone-800">
+                <h3 className="mt-4 text-base font-medium text-taupe-800">
                   No products found
                 </h3>
-                <p className="mt-1 text-sm text-stone-500">
+                <p className="mt-1 text-sm text-taupe-500">
                   Try adjusting your filters or search terms.
                 </p>
               </div>
@@ -347,18 +415,18 @@ function ShopPageContent() {
                     setCurrentPage((p) => Math.max(1, p - 1))
                   }
                   disabled={currentPage === 1}
-                  className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-lg border border-taupe-300 bg-white px-3 py-2 text-sm font-medium text-taupe-700 hover:bg-taupe-50 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Previous
                 </button>
 
-                <span className="px-3 py-2 text-sm text-stone-600">
+                <span className="px-3 py-2 text-sm text-taupe-600">
                   Page{" "}
-                  <span className="font-medium text-stone-800">
+                  <span className="font-medium text-taupe-800">
                     {currentPage}
                   </span>{" "}
                   of{" "}
-                  <span className="font-medium text-stone-800">
+                  <span className="font-medium text-taupe-800">
                     {totalPages}
                   </span>
                 </span>
@@ -368,7 +436,7 @@ function ShopPageContent() {
                     setCurrentPage((p) => Math.min(totalPages, p + 1))
                   }
                   disabled={currentPage === totalPages}
-                  className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-lg border border-taupe-300 bg-white px-3 py-2 text-sm font-medium text-taupe-700 hover:bg-taupe-50 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Next
                 </button>
@@ -396,10 +464,10 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/products/${product.id}`}
-      className="group relative flex flex-col overflow-hidden rounded-lg border border-stone-200 bg-white transition-shadow hover:shadow-md"
+      className="group relative flex flex-col overflow-hidden rounded-lg border border-taupe-200 bg-white transition-shadow hover:shadow-md"
     >
       {/* Image */}
-      <div className="relative aspect-square overflow-hidden bg-stone-100">
+      <div className="relative aspect-square overflow-hidden bg-taupe-100">
         {product.image ? (
           <Image
             src={product.image}
@@ -409,7 +477,7 @@ function ProductCard({ product }: { product: Product }) {
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-stone-300">
+          <div className="flex h-full items-center justify-center text-taupe-300">
             <svg
               className="h-12 w-12"
               fill="none"
@@ -428,8 +496,8 @@ function ProductCard({ product }: { product: Product }) {
 
         {/* Sold Out overlay */}
         {!product.inStock && (
-          <div className="absolute inset-0 flex items-center justify-center bg-stone-900/60">
-            <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-stone-800">
+          <div className="absolute inset-0 flex items-center justify-center bg-taupe-900/60">
+            <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-taupe-800">
               Sold Out
             </span>
           </div>
@@ -438,12 +506,12 @@ function ProductCard({ product }: { product: Product }) {
         {/* Badges */}
         <div className="absolute top-2 left-2 flex flex-wrap gap-1">
           {product.category && (
-            <span className="rounded-full bg-amber-600 px-2 py-0.5 text-[10px] font-medium text-white">
+            <span className="rounded-full bg-blush-600 px-2 py-0.5 text-[10px] font-medium text-white">
               {product.category}
             </span>
           )}
           {product.texture && (
-            <span className="rounded-full bg-stone-700 px-2 py-0.5 text-[10px] font-medium text-white">
+            <span className="rounded-full bg-taupe-700 px-2 py-0.5 text-[10px] font-medium text-white">
               {product.texture}
             </span>
           )}
@@ -452,10 +520,10 @@ function ProductCard({ product }: { product: Product }) {
 
       {/* Details */}
       <div className="flex flex-1 flex-col p-3">
-        <h3 className="text-sm font-medium text-stone-800 line-clamp-2 group-hover:text-amber-700 transition-colors">
+        <h3 className="text-sm font-medium text-taupe-800 line-clamp-2 group-hover:text-blush-700 transition-colors">
           {product.name}
         </h3>
-        <p className="mt-1 text-base font-semibold text-stone-900">
+        <p className="mt-1 text-base font-semibold text-taupe-900">
           ${product.price.toFixed(2)}
         </p>
 
@@ -463,7 +531,7 @@ function ProductCard({ product }: { product: Product }) {
           <button
             onClick={handleAddToCart}
             disabled={!product.inStock}
-            className="w-full rounded-lg bg-amber-700 px-3 py-2 text-xs font-medium text-white hover:bg-amber-800 transition-colors disabled:cursor-not-allowed disabled:bg-stone-300 disabled:text-stone-500"
+            className="w-full rounded-lg bg-taupe-700 px-3 py-2 text-xs font-medium text-white hover:bg-taupe-800 transition-colors disabled:cursor-not-allowed disabled:bg-taupe-300 disabled:text-taupe-500"
           >
             {product.inStock ? "Add to Cart" : "Sold Out"}
           </button>
@@ -478,18 +546,18 @@ export default function ShopPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-stone-50">
+        <div className="min-h-screen bg-taupe-50">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <div className="mb-8">
-              <div className="h-8 w-48 animate-pulse rounded bg-stone-200" />
-              <div className="mt-2 h-4 w-64 animate-pulse rounded bg-stone-200" />
+              <div className="h-8 w-48 animate-pulse rounded bg-taupe-200" />
+              <div className="mt-2 h-4 w-64 animate-pulse rounded bg-taupe-200" />
             </div>
             <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
               {Array.from({ length: 8 }).map((_, i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="aspect-square rounded-lg bg-stone-200" />
-                  <div className="mt-3 h-4 w-3/4 rounded bg-stone-200" />
-                  <div className="mt-2 h-4 w-1/2 rounded bg-stone-200" />
+                  <div className="aspect-square rounded-lg bg-taupe-200" />
+                  <div className="mt-3 h-4 w-3/4 rounded bg-taupe-200" />
+                  <div className="mt-2 h-4 w-1/2 rounded bg-taupe-200" />
                 </div>
               ))}
             </div>

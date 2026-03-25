@@ -9,7 +9,7 @@ function StarRating({ rating }: { rating: number }) {
       {[1, 2, 3, 4, 5].map((star) => (
         <svg
           key={star}
-          className={`w-4 h-4 ${star <= rating ? "text-amber-500" : "text-stone-300"}`}
+          className={`w-4 h-4 ${star <= rating ? "text-blush-500" : "text-taupe-300"}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -50,14 +50,15 @@ export default function ReviewsSection() {
   const visible = getVisibleTestimonials();
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blush-50 via-blush-50/50 to-taupe-100">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mb-3">
+          <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-taupe-900 mb-3">
             What Our Customers Say
           </h2>
-          <p className="text-stone-600 max-w-2xl mx-auto">
-            Real reviews from women who love their Ashanti Naturals hair
+          <div className="w-16 h-0.5 bg-blush-200 mx-auto mb-4" />
+          <p className="text-taupe-600 max-w-2xl mx-auto">
+            Real reviews from women who love their Luméira hair
           </p>
         </div>
 
@@ -70,7 +71,7 @@ export default function ReviewsSection() {
             {visible.map((testimonial, idx) => (
               <div
                 key={`${testimonial.name}-${currentIndex}-${idx}`}
-                className={`bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-amber-200/60 shadow-sm
+                className={`bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-blush-200/60 shadow-sm
                   transition-all duration-500
                   ${idx === 1 ? "hidden md:block" : ""}
                   ${idx === 2 ? "hidden lg:block" : ""}`}
@@ -78,18 +79,18 @@ export default function ReviewsSection() {
                 <StarRating rating={testimonial.rating} />
 
                 <blockquote className="mt-4 mb-6">
-                  <p className="text-stone-700 leading-relaxed italic">
+                  <p className="text-taupe-700 leading-relaxed italic">
                     &ldquo;{testimonial.text}&rdquo;
                   </p>
                 </blockquote>
 
-                <div className="flex items-center justify-between border-t border-stone-100 pt-4">
+                <div className="flex items-center justify-between border-t border-taupe-100 pt-4">
                   <div>
-                    <p className="font-semibold text-stone-900 text-sm">{testimonial.name}</p>
-                    <p className="text-xs text-stone-500">{testimonial.location}</p>
+                    <p className="font-semibold text-taupe-900 text-sm">{testimonial.name}</p>
+                    <p className="text-xs text-taupe-500">{testimonial.location}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs font-medium text-amber-700">{testimonial.product}</p>
+                    <p className="text-xs font-medium text-blush-700">{testimonial.product}</p>
                   </div>
                 </div>
               </div>
@@ -101,8 +102,8 @@ export default function ReviewsSection() {
             <button
               onClick={prev}
               aria-label="Previous review"
-              className="p-2 rounded-full border border-amber-300 text-amber-700
-                         hover:bg-amber-100 transition-colors cursor-pointer"
+              className="p-2 rounded-full border border-blush-300 text-blush-700
+                         hover:bg-blush-100 transition-colors cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -116,7 +117,7 @@ export default function ReviewsSection() {
                   onClick={() => setCurrentIndex(idx)}
                   aria-label={`Go to review ${idx + 1}`}
                   className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer
-                    ${idx === currentIndex ? "bg-amber-600 w-6" : "bg-amber-300 hover:bg-amber-400"}`}
+                    ${idx === currentIndex ? "bg-blush-600 w-6" : "bg-blush-300 hover:bg-blush-400"}`}
                 />
               ))}
             </div>
@@ -124,8 +125,8 @@ export default function ReviewsSection() {
             <button
               onClick={next}
               aria-label="Next review"
-              className="p-2 rounded-full border border-amber-300 text-amber-700
-                         hover:bg-amber-100 transition-colors cursor-pointer"
+              className="p-2 rounded-full border border-blush-300 text-blush-700
+                         hover:bg-blush-100 transition-colors cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

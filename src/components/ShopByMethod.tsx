@@ -95,13 +95,14 @@ const methods: MethodCard[] = [
 
 export default function ShopByMethod() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-stone-50">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-taupe-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mb-3">
+          <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-taupe-900 mb-3">
             Shop by Method
           </h2>
-          <p className="text-stone-600 max-w-2xl mx-auto">
+          <div className="w-16 h-0.5 bg-blush-200 mx-auto mb-4" />
+          <p className="text-taupe-600 max-w-2xl mx-auto">
             Find the perfect installation method for your lifestyle and skill level
           </p>
         </div>
@@ -111,16 +112,16 @@ export default function ShopByMethod() {
             <Link
               key={method.slug}
               href={`/shop?method=${method.slug}`}
-              className="group flex flex-col items-center text-center p-6 bg-white rounded-xl border border-stone-200 
-                         transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-amber-300 hover:bg-amber-50/50"
+              className="group flex flex-col items-center text-center p-6 bg-white rounded-xl border border-taupe-200 
+                         transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-blush-300 hover:bg-blush-50/50"
             >
-              <div className="text-stone-600 group-hover:text-amber-700 transition-colors duration-300 mb-4">
+              <div className="text-taupe-600 group-hover:text-blush-700 transition-colors duration-300 mb-4">
                 {method.icon}
               </div>
-              <h3 className="font-serif font-semibold text-stone-900 group-hover:text-amber-800 transition-colors duration-300 mb-1">
+              <h3 className="font-heading font-semibold text-taupe-900 group-hover:text-blush-800 transition-colors duration-300 mb-1">
                 {method.name}
               </h3>
-              <p className="text-xs text-stone-500 leading-relaxed">
+              <p className="text-xs text-taupe-500 leading-relaxed">
                 {method.description}
               </p>
             </Link>

@@ -38,15 +38,15 @@ function FilterSection({
   children,
 }: FilterSectionProps) {
   return (
-    <div className="border-b border-stone-200 py-3">
+    <div className="border-b border-taupe-200 py-3">
       <button
         onClick={onToggle}
         className="flex w-full items-center justify-between text-left"
         aria-expanded={isOpen}
       >
-        <span className="text-sm font-medium text-stone-800">{title}</span>
+        <span className="text-sm font-medium text-taupe-800">{title}</span>
         <svg
-          className={`h-4 w-4 text-stone-400 transition-transform duration-200 ${
+          className={`h-4 w-4 text-taupe-400 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
           fill="none"
@@ -94,13 +94,13 @@ function CheckboxGroup({
       {options.map((option) => (
         <label
           key={option}
-          className="flex cursor-pointer items-center gap-2 text-sm text-stone-600 hover:text-stone-800 transition-colors"
+          className="flex cursor-pointer items-center gap-2 text-sm text-taupe-600 hover:text-taupe-800 transition-colors"
         >
           <input
             type="checkbox"
             checked={selected.includes(option)}
             onChange={() => toggle(option)}
-            className="h-4 w-4 rounded border-stone-300 text-amber-600 focus:ring-amber-500"
+            className="h-4 w-4 rounded border-taupe-300 text-blush-600 focus:ring-blush-500"
           />
           <span>{option}</span>
         </label>
@@ -173,12 +173,12 @@ export default function FilterSidebar({
   const filterContent = (
     <div className="space-y-0">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-stone-200">
-        <h3 className="text-base font-semibold text-stone-800">Filters</h3>
+      <div className="flex items-center justify-between pb-3 border-b border-taupe-200">
+        <h3 className="text-base font-semibold text-taupe-800">Filters</h3>
         {hasActiveFilters && (
           <button
             onClick={clearAll}
-            className="text-xs text-amber-700 hover:text-amber-800 font-medium transition-colors"
+            className="text-xs text-blush-700 hover:text-blush-800 font-medium transition-colors"
           >
             Clear All
           </button>
@@ -269,7 +269,7 @@ export default function FilterSidebar({
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <div className="flex-1">
-              <label className="text-xs text-stone-500">Min</label>
+              <label className="text-xs text-taupe-500">Min</label>
               <input
                 type="number"
                 min={options.priceMin}
@@ -283,12 +283,12 @@ export default function FilterSidebar({
                     max: filters.priceRange?.max ?? options.priceMax,
                   });
                 }}
-                className="w-full rounded-md border border-stone-300 px-2 py-1.5 text-sm text-stone-800 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                className="w-full rounded-md border border-taupe-300 px-2 py-1.5 text-sm text-taupe-800 focus:border-blush-500 focus:outline-none focus:ring-1 focus:ring-blush-500"
               />
             </div>
-            <span className="mt-4 text-stone-400">—</span>
+            <span className="mt-4 text-taupe-400">—</span>
             <div className="flex-1">
-              <label className="text-xs text-stone-500">Max</label>
+              <label className="text-xs text-taupe-500">Max</label>
               <input
                 type="number"
                 min={options.priceMin}
@@ -302,14 +302,14 @@ export default function FilterSidebar({
                     max,
                   });
                 }}
-                className="w-full rounded-md border border-stone-300 px-2 py-1.5 text-sm text-stone-800 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                className="w-full rounded-md border border-taupe-300 px-2 py-1.5 text-sm text-taupe-800 focus:border-blush-500 focus:outline-none focus:ring-1 focus:ring-blush-500"
               />
             </div>
           </div>
           {filters.priceRange && (
             <button
               onClick={() => updateFilter("priceRange", null)}
-              className="text-xs text-amber-700 hover:text-amber-800 transition-colors"
+              className="text-xs text-blush-700 hover:text-blush-800 transition-colors"
             >
               Clear price range
             </button>
@@ -324,7 +324,7 @@ export default function FilterSidebar({
       {/* Mobile toggle button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="flex items-center gap-2 rounded-md border border-stone-300 bg-white px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors lg:hidden"
+        className="flex items-center gap-2 rounded-md border border-taupe-300 bg-white px-3 py-2 text-sm font-medium text-taupe-700 hover:bg-taupe-50 transition-colors lg:hidden"
         aria-label="Open filters"
       >
         <svg
@@ -342,7 +342,7 @@ export default function FilterSidebar({
         </svg>
         Filters
         {hasActiveFilters && (
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-600 text-xs text-white">
+          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blush-600 text-xs text-white">
             {filters.textures.length +
               filters.methods.length +
               filters.categories.length +
@@ -369,13 +369,13 @@ export default function FilterSidebar({
         }`}
       >
         <div className="flex h-full flex-col">
-          <div className="flex items-center justify-between border-b border-stone-200 px-4 py-3">
-            <span className="text-base font-semibold text-stone-800">
+          <div className="flex items-center justify-between border-b border-taupe-200 px-4 py-3">
+            <span className="text-base font-semibold text-taupe-800">
               Filters
             </span>
             <button
               onClick={() => setMobileOpen(false)}
-              className="rounded-md p-1 text-stone-400 hover:text-stone-600 transition-colors"
+              className="rounded-md p-1 text-taupe-400 hover:text-taupe-600 transition-colors"
               aria-label="Close filters"
             >
               <svg
@@ -399,7 +399,7 @@ export default function FilterSidebar({
 
       {/* Desktop sidebar */}
       <aside className="hidden lg:block sticky top-20 w-64 flex-shrink-0">
-        <div className="rounded-lg border border-stone-200 bg-white p-4">
+        <div className="rounded-lg border border-taupe-200 bg-white p-4">
           {filterContent}
         </div>
       </aside>

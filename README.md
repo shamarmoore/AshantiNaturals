@@ -1,4 +1,4 @@
-# Ashanti Naturals
+# Luméira Hair Co.
 
 A premium human hair wig e-commerce storefront built with Next.js.
 

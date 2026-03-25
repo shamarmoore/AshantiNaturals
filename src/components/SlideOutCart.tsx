@@ -67,13 +67,13 @@ export default function SlideOutCart({ isOpen, onClose }: SlideOutCartProps) {
       >
         <div className="flex h-full flex-col">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-stone-200 px-4 py-4">
-            <h2 className="text-lg font-semibold text-stone-800">
+          <div className="flex items-center justify-between border-b border-taupe-200 px-4 py-4">
+            <h2 className="text-lg font-semibold text-taupe-800">
               Your Cart ({items.reduce((s, i) => s + i.quantity, 0)})
             </h2>
             <button
               onClick={onClose}
-              className="rounded-md p-1 text-stone-400 hover:text-stone-600 transition-colors"
+              className="rounded-md p-1 text-taupe-400 hover:text-taupe-600 transition-colors"
               aria-label="Close cart"
             >
               <svg
@@ -97,7 +97,7 @@ export default function SlideOutCart({ isOpen, onClose }: SlideOutCartProps) {
             {items.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center">
                 <svg
-                  className="h-16 w-16 text-stone-300 mb-4"
+                  className="h-16 w-16 text-taupe-300 mb-4"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -109,17 +109,17 @@ export default function SlideOutCart({ isOpen, onClose }: SlideOutCartProps) {
                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                   />
                 </svg>
-                <p className="text-stone-500 text-sm">Your cart is empty</p>
+                <p className="text-taupe-500 text-sm">Your cart is empty</p>
               </div>
             ) : (
               <ul className="space-y-4">
                 {items.map((item) => (
                   <li
                     key={item.id}
-                    className="flex gap-3 rounded-lg border border-stone-100 bg-stone-50 p-3"
+                    className="flex gap-3 rounded-lg border border-taupe-100 bg-taupe-50 p-3"
                   >
                     {/* Product image */}
-                    <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-stone-200">
+                    <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-taupe-200">
                       {item.image ? (
                         <Image
                           src={item.image}
@@ -129,7 +129,7 @@ export default function SlideOutCart({ isOpen, onClose }: SlideOutCartProps) {
                           sizes="80px"
                         />
                       ) : (
-                        <div className="flex h-full w-full items-center justify-center text-stone-400">
+                          <div className="flex h-full w-full items-center justify-center text-taupe-400">
                           <svg
                             className="h-8 w-8"
                             fill="none"
@@ -150,12 +150,12 @@ export default function SlideOutCart({ isOpen, onClose }: SlideOutCartProps) {
                     {/* Product details */}
                     <div className="flex flex-1 flex-col justify-between min-w-0">
                       <div className="flex justify-between gap-2">
-                        <h3 className="text-sm font-medium text-stone-800 truncate">
+                        <h3 className="text-sm font-medium text-taupe-800 truncate">
                           {item.name}
                         </h3>
                         <button
                           onClick={() => removeFromCart(item.id)}
-                          className="flex-shrink-0 text-stone-400 hover:text-red-500 transition-colors"
+                          className="flex-shrink-0 text-taupe-400 hover:text-red-500 transition-colors"
                           aria-label={`Remove ${item.name}`}
                         >
                           <svg
@@ -175,31 +175,31 @@ export default function SlideOutCart({ isOpen, onClose }: SlideOutCartProps) {
                       </div>
                       <div className="flex items-center justify-between mt-1">
                         {/* Quantity controls */}
-                        <div className="flex items-center rounded-md border border-stone-300">
+                        <div className="flex items-center rounded-md border border-taupe-300">
                           <button
                             onClick={() =>
                               updateCartQuantity(item.id, item.quantity - 1)
                             }
                             disabled={item.quantity <= 1}
-                            className="px-2 py-0.5 text-stone-600 hover:bg-stone-100 transition-colors disabled:text-stone-300 disabled:cursor-not-allowed"
+                            className="px-2 py-0.5 text-taupe-600 hover:bg-taupe-100 transition-colors disabled:text-taupe-300 disabled:cursor-not-allowed"
                             aria-label="Decrease quantity"
                           >
                             −
                           </button>
-                          <span className="px-2 py-0.5 text-sm font-medium text-stone-800 border-x border-stone-300 min-w-[2rem] text-center">
+                          <span className="px-2 py-0.5 text-sm font-medium text-taupe-800 border-x border-taupe-300 min-w-[2rem] text-center">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() =>
                               updateCartQuantity(item.id, item.quantity + 1)
                             }
-                            className="px-2 py-0.5 text-stone-600 hover:bg-stone-100 transition-colors"
+                            className="px-2 py-0.5 text-taupe-600 hover:bg-taupe-100 transition-colors"
                             aria-label="Increase quantity"
                           >
                             +
                           </button>
                         </div>
-                        <p className="text-sm font-semibold text-stone-900">
+                        <p className="text-sm font-semibold text-taupe-900">
                           ${(item.price * item.quantity).toFixed(2)}
                         </p>
                       </div>
@@ -212,23 +212,23 @@ export default function SlideOutCart({ isOpen, onClose }: SlideOutCartProps) {
 
           {/* Footer */}
           {items.length > 0 && (
-            <div className="border-t border-stone-200 px-4 py-4 space-y-3">
+            <div className="border-t border-taupe-200 px-4 py-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-stone-500">Subtotal</span>
-                <span className="text-lg font-semibold text-stone-900">
+                <span className="text-sm text-taupe-500">Subtotal</span>
+                <span className="text-lg font-semibold text-taupe-900">
                   ${subtotal.toFixed(2)}
                 </span>
               </div>
               <Link
                 href="/cart"
                 onClick={onClose}
-                className="block w-full rounded-md bg-amber-600 px-4 py-3 text-center text-sm font-medium text-white hover:bg-amber-700 transition-colors"
+                className="block w-full rounded-sm bg-taupe-400 px-4 py-3 text-center text-sm font-medium text-white hover:bg-taupe-500 transition-colors"
               >
                 Checkout
               </Link>
               <button
                 onClick={onClose}
-                className="w-full rounded-md border border-stone-300 px-4 py-2.5 text-center text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors"
+                className="w-full rounded-sm border border-taupe-300 px-4 py-2.5 text-center text-sm font-medium text-taupe-700 hover:bg-taupe-50 transition-colors"
               >
                 Continue Shopping
               </button>

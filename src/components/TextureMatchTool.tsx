@@ -129,13 +129,13 @@ export default function TextureMatchTool() {
   };
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-stone-100 to-stone-50">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-taupe-100 to-taupe-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mb-3">
+          <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-taupe-900 mb-3">
             Find Your Texture Match
           </h2>
-          <p className="text-stone-600 max-w-2xl mx-auto">
+          <p className="text-taupe-600 max-w-2xl mx-auto">
             Select a texture to discover products that complement your style
           </p>
         </div>
@@ -149,23 +149,23 @@ export default function TextureMatchTool() {
                 onClick={() => setSelectedTexture(texture.name)}
                 className={`group flex flex-col items-center p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer
                   ${isSelected
-                    ? "border-amber-600 bg-amber-50 shadow-md scale-105"
-                    : "border-stone-200 bg-white hover:border-amber-300 hover:shadow-md hover:scale-102"
+                    ? "border-blush-600 bg-blush-50 shadow-md scale-105"
+                    : "border-taupe-200 bg-white hover:border-blush-300 hover:shadow-md hover:scale-102"
                   }`}
               >
                 <div
                   className={`w-full h-16 mb-3 transition-colors duration-300
-                    ${isSelected ? "text-amber-700" : "text-stone-400 group-hover:text-stone-600"}`}
+                    ${isSelected ? "text-blush-700" : "text-taupe-400 group-hover:text-taupe-600"}`}
                 >
                   {texture.pattern}
                 </div>
                 <h3
-                  className={`font-serif font-semibold text-sm transition-colors duration-300
-                    ${isSelected ? "text-amber-800" : "text-stone-800"}`}
+                  className={`font-heading font-semibold text-sm transition-colors duration-300
+                    ${isSelected ? "text-blush-800" : "text-taupe-800"}`}
                 >
                   {texture.name}
                 </h3>
-                <p className="text-xs text-stone-500 mt-0.5">{texture.description}</p>
+                <p className="text-xs text-taupe-500 mt-0.5">{texture.description}</p>
               </button>
             );
           })}
@@ -175,7 +175,7 @@ export default function TextureMatchTool() {
           <div className="text-center mb-6">
             <button
               onClick={handleReset}
-              className="inline-flex items-center gap-1.5 text-sm text-stone-500 hover:text-amber-700 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-sm text-taupe-500 hover:text-blush-700 transition-colors cursor-pointer"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -187,7 +187,7 @@ export default function TextureMatchTool() {
 
         {loading && (
           <div className="flex justify-center py-12">
-            <div className="w-8 h-8 border-2 border-amber-600 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-blush-600 border-t-transparent rounded-full animate-spin" />
           </div>
         )}
 
@@ -196,7 +196,7 @@ export default function TextureMatchTool() {
             <p className="text-red-600 mb-3">{error}</p>
             <button
               onClick={() => selectedTexture && fetchProducts(selectedTexture)}
-              className="text-sm text-amber-700 underline hover:text-amber-800 cursor-pointer"
+              className="text-sm text-blush-700 underline hover:text-blush-800 cursor-pointer"
             >
               Try again
             </button>
@@ -205,7 +205,7 @@ export default function TextureMatchTool() {
 
         {!loading && !error && selectedTexture && products.length > 0 && (
           <div>
-            <h3 className="font-serif text-xl font-semibold text-stone-900 mb-6 text-center">
+            <h3 className="font-heading text-xl font-semibold text-taupe-900 mb-6 text-center">
               Recommended for {selectedTexture}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -213,10 +213,10 @@ export default function TextureMatchTool() {
                 <Link
                   key={product.id}
                   href={`/products/${product.id}`}
-                  className="group bg-white rounded-xl border border-stone-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-amber-300"
+                  className="group bg-white rounded-xl border border-taupe-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-blush-300"
                 >
-                  <div className="aspect-square bg-stone-100 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center text-stone-300">
+                  <div className="aspect-square bg-taupe-100 relative overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center text-taupe-300">
                       <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1">
                         <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
@@ -232,11 +232,11 @@ export default function TextureMatchTool() {
                     />
                   </div>
                   <div className="p-4">
-                    <p className="text-xs text-amber-700 font-medium mb-1">{product.category}</p>
-                    <h4 className="font-semibold text-stone-900 text-sm group-hover:text-amber-800 transition-colors line-clamp-2">
+                    <p className="text-xs text-blush-700 font-medium mb-1">{product.category}</p>
+                    <h4 className="font-semibold text-taupe-900 text-sm group-hover:text-blush-800 transition-colors line-clamp-2">
                       {product.name}
                     </h4>
-                    <p className="text-stone-800 font-bold mt-2">${product.price.toFixed(2)}</p>
+                    <p className="text-taupe-800 font-bold mt-2">${product.price.toFixed(2)}</p>
                   </div>
                 </Link>
               ))}
@@ -245,7 +245,7 @@ export default function TextureMatchTool() {
         )}
 
         {!loading && !error && selectedTexture && products.length === 0 && (
-          <p className="text-center text-stone-500 py-8">
+          <p className="text-center text-taupe-500 py-8">
             No products found for {selectedTexture}. Check back soon!
           </p>
         )}

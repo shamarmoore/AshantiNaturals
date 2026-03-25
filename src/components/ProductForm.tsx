@@ -113,7 +113,7 @@ export default function ProductForm({ product }: ProductFormProps) {
       )}
 
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">
+        <label className="block text-sm font-medium text-taupe-700 mb-1">
           Product Name *
         </label>
         <input
@@ -121,13 +121,13 @@ export default function ProductForm({ product }: ProductFormProps) {
           required
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          className="w-full border border-taupe-300 rounded-sm px-3 py-2 text-taupe-900 focus:ring-2 focus:ring-blush-500 focus:border-blush-500"
           placeholder="e.g., Brazilian Body Wave Wig"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">
+        <label className="block text-sm font-medium text-taupe-700 mb-1">
           Description *
         </label>
         <textarea
@@ -135,14 +135,14 @@ export default function ProductForm({ product }: ProductFormProps) {
           rows={4}
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
-          className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          className="w-full border border-taupe-300 rounded-sm px-3 py-2 text-taupe-900 focus:ring-2 focus:ring-blush-500 focus:border-blush-500"
           placeholder="Describe the wig, its texture, density, etc."
         />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">
+          <label className="block text-sm font-medium text-taupe-700 mb-1">
             Price ($) *
           </label>
           <input
@@ -152,18 +152,18 @@ export default function ProductForm({ product }: ProductFormProps) {
             step="0.01"
             value={form.price}
             onChange={(e) => setForm({ ...form, price: e.target.value })}
-            className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full border border-taupe-300 rounded-sm px-3 py-2 text-taupe-900 focus:ring-2 focus:ring-blush-500 focus:border-blush-500"
             placeholder="199.99"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">
+          <label className="block text-sm font-medium text-taupe-700 mb-1">
             Category
           </label>
           <select
             value={form.category}
             onChange={(e) => setForm({ ...form, category: e.target.value })}
-            className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full border border-taupe-300 rounded-sm px-3 py-2 text-taupe-900 focus:ring-2 focus:ring-blush-500 focus:border-blush-500"
           >
             <option value="Wig">Wig</option>
             <option value="Lace Front">Lace Front</option>
@@ -177,26 +177,26 @@ export default function ProductForm({ product }: ProductFormProps) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">
+          <label className="block text-sm font-medium text-taupe-700 mb-1">
             Length
           </label>
           <input
             type="text"
             value={form.length}
             onChange={(e) => setForm({ ...form, length: e.target.value })}
-            className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full border border-taupe-300 rounded-sm px-3 py-2 text-taupe-900 focus:ring-2 focus:ring-blush-500 focus:border-blush-500"
             placeholder='e.g., 18"'
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">
+          <label className="block text-sm font-medium text-taupe-700 mb-1">
             Color
           </label>
           <input
             type="text"
             value={form.color}
             onChange={(e) => setForm({ ...form, color: e.target.value })}
-            className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full border border-taupe-300 rounded-sm px-3 py-2 text-taupe-900 focus:ring-2 focus:ring-blush-500 focus:border-blush-500"
             placeholder="e.g., Natural Black"
           />
         </div>
@@ -204,13 +204,13 @@ export default function ProductForm({ product }: ProductFormProps) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">
+          <label className="block text-sm font-medium text-taupe-700 mb-1">
             Texture
           </label>
           <select
             value={form.texture}
             onChange={(e) => setForm({ ...form, texture: e.target.value })}
-            className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full border border-taupe-300 rounded-sm px-3 py-2 text-taupe-900 focus:ring-2 focus:ring-blush-500 focus:border-blush-500"
           >
             <option value="">Select texture…</option>
             <option value="Straight">Straight</option>
@@ -222,13 +222,13 @@ export default function ProductForm({ product }: ProductFormProps) {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">
+          <label className="block text-sm font-medium text-taupe-700 mb-1">
             Method
           </label>
           <select
             value={form.method}
             onChange={(e) => setForm({ ...form, method: e.target.value })}
-            className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full border border-taupe-300 rounded-sm px-3 py-2 text-taupe-900 focus:ring-2 focus:ring-blush-500 focus:border-blush-500"
           >
             <option value="">Select method…</option>
             <option value="Sew-In">Sew-In</option>
@@ -242,7 +242,7 @@ export default function ProductForm({ product }: ProductFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">
+        <label className="block text-sm font-medium text-taupe-700 mb-1">
           Product Image
         </label>
         <div className="flex items-start gap-4">
@@ -252,17 +252,17 @@ export default function ProductForm({ product }: ProductFormProps) {
               accept="image/*"
               onChange={handleImageUpload}
               disabled={uploading}
-              className="w-full text-sm text-stone-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-stone-100 file:text-stone-700 hover:file:bg-stone-200"
+              className="w-full text-sm text-taupe-500 file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-medium file:bg-taupe-100 file:text-taupe-700 hover:file:bg-taupe-200"
             />
             {uploading && (
-              <p className="text-sm text-amber-600 mt-1">Uploading...</p>
+              <p className="text-sm text-blush-600 mt-1">Uploading...</p>
             )}
             {form.image && (
               <p className="text-sm text-green-600 mt-1">Image uploaded ✓</p>
             )}
           </div>
           {form.image && (
-            <div className="w-20 h-20 relative rounded-md overflow-hidden border border-stone-200">
+            <div className="w-20 h-20 relative rounded-sm overflow-hidden border border-taupe-200">
               <Image
                 src={form.image}
                 alt="Preview"
@@ -280,18 +280,18 @@ export default function ProductForm({ product }: ProductFormProps) {
             type="checkbox"
             checked={form.inStock}
             onChange={(e) => setForm({ ...form, inStock: e.target.checked })}
-            className="rounded border-stone-300 text-amber-600 focus:ring-amber-500"
+            className="rounded border-taupe-300 text-blush-600 focus:ring-blush-500"
           />
-          <span className="text-sm text-stone-700">In Stock</span>
+          <span className="text-sm text-taupe-700">In Stock</span>
         </label>
         <label className="flex items-center gap-2 cursor-pointer">
           <input
             type="checkbox"
             checked={form.featured}
             onChange={(e) => setForm({ ...form, featured: e.target.checked })}
-            className="rounded border-stone-300 text-amber-600 focus:ring-amber-500"
+            className="rounded border-taupe-300 text-blush-600 focus:ring-blush-500"
           />
-          <span className="text-sm text-stone-700">Featured Product</span>
+          <span className="text-sm text-taupe-700">Featured Product</span>
         </label>
       </div>
 
@@ -299,7 +299,7 @@ export default function ProductForm({ product }: ProductFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="bg-amber-600 text-white px-6 py-2 rounded-md hover:bg-amber-700 transition-colors disabled:bg-amber-300"
+          className="bg-taupe-400 text-white px-6 py-2 rounded-sm hover:bg-taupe-500 transition-colors disabled:bg-taupe-300"
         >
           {loading
             ? "Saving..."
@@ -310,7 +310,7 @@ export default function ProductForm({ product }: ProductFormProps) {
         <button
           type="button"
           onClick={() => router.push("/admin/products")}
-          className="border border-stone-300 text-stone-700 px-6 py-2 rounded-md hover:bg-stone-50 transition-colors"
+          className="border border-taupe-300 text-taupe-700 px-6 py-2 rounded-sm hover:bg-taupe-50 transition-colors"
         >
           Cancel
         </button>

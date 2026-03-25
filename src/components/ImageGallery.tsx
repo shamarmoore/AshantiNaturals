@@ -9,7 +9,7 @@ interface ImageGalleryProps {
 
 const PlaceholderSvg = ({ className = "w-24 h-24" }: { className?: string }) => (
   <svg
-    className={`${className} text-stone-300`}
+    className={`${className} text-taupe-300`}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -54,7 +54,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
   if (!hasImages) {
     return (
       <div className="w-full">
-        <div className="aspect-square rounded-lg bg-stone-100 flex items-center justify-center">
+        <div className="aspect-square rounded-lg bg-taupe-100 flex items-center justify-center">
           <PlaceholderSvg />
         </div>
       </div>
@@ -67,7 +67,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
       <div className="relative">
         <div
           ref={mainImageRef}
-          className="relative aspect-square overflow-hidden rounded-lg bg-stone-100 cursor-crosshair"
+          className="relative aspect-square overflow-hidden rounded-lg bg-taupe-100 cursor-crosshair"
           onMouseEnter={() => setIsZooming(true)}
           onMouseLeave={() => setIsZooming(false)}
           onMouseMove={handleMouseMove}
@@ -94,7 +94,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
           <>
             <button
               onClick={() => goTo(activeIndex - 1)}
-              className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-2 text-stone-700 shadow-sm hover:bg-white transition-colors"
+              className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-2 text-taupe-700 shadow-sm hover:bg-white transition-colors"
               aria-label="Previous image"
             >
               <svg
@@ -113,7 +113,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
             </button>
             <button
               onClick={() => goTo(activeIndex + 1)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-2 text-stone-700 shadow-sm hover:bg-white transition-colors"
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-2 text-taupe-700 shadow-sm hover:bg-white transition-colors"
               aria-label="Next image"
             >
               <svg
@@ -150,8 +150,8 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
               onClick={() => setActiveIndex(index)}
               className={`relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border-2 transition-all ${
                 index === activeIndex
-                  ? "border-amber-600 ring-1 ring-amber-600"
-                  : "border-stone-200 hover:border-stone-400"
+                  ? "border-blush-600 ring-1 ring-blush-600"
+                  : "border-taupe-200 hover:border-taupe-400"
               }`}
               aria-label={`View image ${index + 1}`}
             >

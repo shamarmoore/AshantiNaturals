@@ -34,8 +34,8 @@ export default function ProductCard({
 
   return (
     <Link href={`/products/${id}`} className="group block">
-      <div className="bg-white rounded-lg shadow-sm border border-stone-200 overflow-hidden hover:shadow-md transition-shadow">
-        <div className="aspect-square relative bg-stone-100">
+        <div className="bg-white rounded-lg shadow-sm border border-taupe-200 overflow-hidden hover:shadow-md hover:border-blush-200 transition-all">
+        <div className="aspect-square relative bg-taupe-100">
           {image ? (
             <Image
               src={image}
@@ -45,7 +45,7 @@ export default function ProductCard({
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-stone-400">
+            <div className="w-full h-full flex items-center justify-center text-taupe-400">
               <svg
                 className="w-16 h-16"
                 fill="none"
@@ -63,7 +63,7 @@ export default function ProductCard({
           )}
           {!inStock && (
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <span className="bg-white text-stone-800 px-3 py-1 rounded-full text-sm font-medium">
+              <span className="bg-white text-taupe-800 px-3 py-1 rounded-full text-sm font-medium">
                 Sold Out
               </span>
             </div>
@@ -71,7 +71,7 @@ export default function ProductCard({
           {/* Quick View overlay */}
           {inStock && (
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-              <span className="bg-white text-stone-800 px-4 py-2 rounded-full text-sm font-medium shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+              <span className="bg-white text-taupe-800 px-4 py-2 rounded-full text-sm font-medium shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                 Quick View
               </span>
             </div>
@@ -79,7 +79,7 @@ export default function ProductCard({
         </div>
         <div className="p-4">
           <div className="flex flex-wrap items-center gap-1.5 mb-1">
-            <span className="text-xs text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
+            <span className="text-xs text-blush-700 bg-blush-50 px-2 py-0.5 rounded-full">
               {category}
             </span>
             {texture && (
@@ -88,20 +88,20 @@ export default function ProductCard({
               </span>
             )}
             {length && (
-              <span className="text-xs text-stone-500">{length}</span>
+              <span className="text-xs text-taupe-500">{length}</span>
             )}
           </div>
-          <h3 className="text-stone-800 font-medium mt-1 group-hover:text-amber-700 transition-colors">
+          <h3 className="text-taupe-800 font-medium mt-1 group-hover:text-blush-700 transition-colors">
             {name}
           </h3>
           <div className="flex items-center justify-between mt-2">
-            <p className="text-lg font-semibold text-stone-900">
+            <p className="text-lg font-semibold text-taupe-900">
               ${price.toFixed(2)}
             </p>
             <button
               onClick={handleAddToCart}
               disabled={!inStock}
-              className="text-sm bg-stone-800 text-white px-3 py-1.5 rounded-md hover:bg-stone-700 transition-colors disabled:bg-stone-300 disabled:cursor-not-allowed"
+              className="text-sm bg-taupe-800 text-white px-3 py-1.5 rounded-sm hover:bg-taupe-700 transition-colors disabled:bg-taupe-300 disabled:cursor-not-allowed"
             >
               Add to Cart
             </button>

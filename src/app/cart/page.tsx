@@ -75,7 +75,7 @@ export default function CartPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-serif font-bold text-stone-800 mb-8">
+      <h1 className="text-3xl font-heading font-semibold text-taupe-800 mb-8">
         Shopping Cart
       </h1>
 
@@ -85,7 +85,7 @@ export default function CartPage() {
             message.includes("successful")
               ? "bg-green-50 text-green-700"
               : message.includes("canceled")
-                ? "bg-amber-50 text-amber-700"
+                ? "bg-blush-50 text-blush-700"
                 : "bg-red-50 text-red-700"
           }`}
         >
@@ -95,10 +95,10 @@ export default function CartPage() {
 
       {cart.length === 0 ? (
         <div className="text-center py-16">
-          <p className="text-stone-500 text-lg mb-4">Your cart is empty</p>
+          <p className="text-taupe-500 text-lg mb-4">Your cart is empty</p>
           <Link
             href="/"
-            className="text-amber-600 hover:text-amber-700 font-medium"
+            className="text-blush-600 hover:text-blush-700 font-medium"
           >
             Continue Shopping →
           </Link>
@@ -109,9 +109,9 @@ export default function CartPage() {
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center gap-4 bg-white p-4 rounded-lg border border-stone-200"
+                className="flex items-center gap-4 bg-white p-4 rounded-lg border border-taupe-200"
               >
-                <div className="w-20 h-20 relative rounded-md overflow-hidden bg-stone-100 flex-shrink-0">
+                <div className="w-20 h-20 relative rounded-md overflow-hidden bg-taupe-100 flex-shrink-0">
                   {item.image ? (
                     <Image
                       src={item.image}
@@ -120,23 +120,23 @@ export default function CartPage() {
                       className="object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-stone-400 text-xs">
+                    <div className="w-full h-full flex items-center justify-center text-taupe-400 text-xs">
                       No image
                     </div>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-medium text-stone-800 truncate">
+                  <h3 className="font-medium text-taupe-800 truncate">
                     {item.name}
                   </h3>
-                  <p className="text-stone-600">${item.price.toFixed(2)}</p>
+                  <p className="text-taupe-600">${item.price.toFixed(2)}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() =>
                       updateCartQuantity(item.id, item.quantity - 1)
                     }
-                    className="w-8 h-8 rounded-md border border-stone-300 flex items-center justify-center hover:bg-stone-50"
+                    className="w-8 h-8 rounded-md border border-taupe-300 flex items-center justify-center hover:bg-taupe-50"
                   >
                     −
                   </button>
@@ -147,17 +147,17 @@ export default function CartPage() {
                     onClick={() =>
                       updateCartQuantity(item.id, item.quantity + 1)
                     }
-                    className="w-8 h-8 rounded-md border border-stone-300 flex items-center justify-center hover:bg-stone-50"
+                    className="w-8 h-8 rounded-md border border-taupe-300 flex items-center justify-center hover:bg-taupe-50"
                   >
                     +
                   </button>
                 </div>
-                <p className="font-medium text-stone-900 w-20 text-right">
+                <p className="font-medium text-taupe-900 w-20 text-right">
                   ${(item.price * item.quantity).toFixed(2)}
                 </p>
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="text-stone-400 hover:text-red-500 transition-colors"
+                  className="text-taupe-400 hover:text-red-500 transition-colors"
                 >
                   <svg
                     className="w-5 h-5"
@@ -177,10 +177,10 @@ export default function CartPage() {
             ))}
           </div>
 
-          <div className="mt-8 border-t border-stone-200 pt-6">
+          <div className="mt-8 border-t border-taupe-200 pt-6">
             <div className="flex justify-between items-center mb-6">
-              <span className="text-lg font-medium text-stone-800">Total</span>
-              <span className="text-2xl font-bold text-stone-900">
+              <span className="text-lg font-medium text-taupe-800">Total</span>
+              <span className="text-2xl font-bold text-taupe-900">
                 ${total.toFixed(2)}
               </span>
             </div>
@@ -188,19 +188,19 @@ export default function CartPage() {
               <button
                 onClick={handleCheckout}
                 disabled={loading}
-                className="flex-1 bg-amber-600 text-white py-3 rounded-md text-lg font-medium hover:bg-amber-700 transition-colors disabled:bg-amber-300"
+                className="flex-1 bg-taupe-400 text-white py-3 rounded-sm text-lg font-medium hover:bg-taupe-500 transition-colors disabled:bg-taupe-300"
               >
                 {loading ? "Processing..." : "Checkout with Stripe"}
               </button>
               <button
                 onClick={() => clearCart()}
-                className="border border-stone-300 text-stone-600 px-6 py-3 rounded-md hover:bg-stone-50 transition-colors"
+                className="border border-taupe-300 text-taupe-600 px-6 py-3 rounded-sm hover:bg-taupe-50 transition-colors"
               >
                 Clear Cart
               </button>
             </div>
             {!session && (
-              <p className="text-sm text-stone-500 mt-3 text-center">
+              <p className="text-sm text-taupe-500 mt-3 text-center">
                 You&apos;ll need to sign in before checking out.
               </p>
             )}

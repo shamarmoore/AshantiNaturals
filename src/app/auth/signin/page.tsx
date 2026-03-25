@@ -5,17 +5,17 @@ import { signIn } from "next-auth/react";
 export default function SignInPage() {
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-sm border border-stone-200 p-8 text-center">
-        <h1 className="text-2xl font-serif font-bold text-stone-800 mb-2">
-          Welcome to Ashanti Naturals
+      <div className="max-w-md w-full bg-white rounded-lg shadow-sm border border-taupe-200 p-8 text-center">
+        <h1 className="text-2xl font-heading font-semibold text-taupe-800 mb-2">
+          Welcome to Luméira
         </h1>
-        <p className="text-stone-500 mb-8">
+        <p className="text-taupe-500 mb-8">
           Sign in to your account to shop and checkout.
         </p>
 
         <button
           onClick={() => signIn("google", { callbackUrl: "/" })}
-          className="w-full flex items-center justify-center gap-3 bg-white border border-stone-300 text-stone-700 px-6 py-3 rounded-md hover:bg-stone-50 transition-colors"
+          className="w-full flex items-center justify-center gap-3 bg-white border border-taupe-300 text-taupe-700 px-6 py-3 rounded-sm hover:bg-taupe-50 transition-colors"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path

@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+@theme {
+  /* Luméira brand palette — anchored on logo colors:
+     Background:  #A6A195   (warm sage-taupe)
+     Main text:   #FFFFFF
+     Accent pink: #F2DADA   */
+  --color-taupe-50: #f4f3f1;
+  --color-taupe-100: #eae8e4;
+  --color-taupe-200: #d5d2cc;
+  --color-taupe-300: #bfbbb2;
+  --color-taupe-400: #a6a195;
+  --color-taupe-500: #8e897d;
+  --color-taupe-600: #747065;
+  --color-taupe-700: #5c5950;
+  --color-taupe-800: #46443d;
+  --color-taupe-900: #31302b;
+  --color-taupe-950: #1e1d1a;
+
+  --color-blush-50: #fdf7f7;
+  --color-blush-100: #f9edec;
+  --color-blush-200: #f2dada;
+  --color-blush-300: #e6bfbf;
+  --color-blush-400: #d69e9e;
+  --color-blush-500: #c07e7e;
+  --color-blush-600: #a66262;
+  --color-blush-700: #864949;
+  --color-blush-800: #6a3838;
+  --color-blush-900: #4e2a2a;
+
+  /* Custom font families */
+  --font-heading: "Cormorant Garamond", "Georgia", serif;
+  --font-logo: "BrownBulgary", serif;
+}
+
+@font-face {
+  font-family: "BrownBulgary";
+  src: url("/fonts/BrownBulgary.otf") format("opentype");
+  font-display: swap;
+}

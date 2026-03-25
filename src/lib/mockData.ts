@@ -1,5 +1,5 @@
 /**
- * Mock product data for Ashanti Naturals.
+ * Mock product data for Luméira Hair Co.
  * Used for database seeding and as a reference dataset.
  */
 
@@ -103,7 +103,7 @@ export const TESTIMONIALS = [
     name: "Crystal Thomas",
     location: "Los Angeles, CA",
     rating: 5,
-    text: "I've been buying hair for years and Ashanti Naturals is hands down the best. The kinky curly bundles match my natural texture perfectly.",
+    text: "I've been buying hair for years and Luméira Hair Co. is hands down the best. The kinky curly bundles match my natural texture perfectly.",
     product: "Kinky Curly Bundle Deal",
   },
   {

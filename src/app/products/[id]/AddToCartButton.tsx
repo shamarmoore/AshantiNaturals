@@ -37,13 +37,13 @@ export default function AddToCartButton({ product, lengths, colors }: Props) {
       {/* Length selector */}
       {lengths && lengths.length > 0 && (
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1.5">
+          <label className="block text-sm font-medium text-taupe-700 mb-1.5">
             Length
           </label>
           <select
             value={selectedLength}
             onChange={(e) => setSelectedLength(e.target.value)}
-            className="w-full border border-stone-300 rounded-md px-3 py-2 text-stone-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full border border-taupe-300 rounded-sm px-3 py-2 text-taupe-900 focus:ring-2 focus:ring-blush-500 focus:border-blush-500"
           >
             {lengths.map((len) => (
               <option key={len} value={len}>
@@ -57,17 +57,17 @@ export default function AddToCartButton({ product, lengths, colors }: Props) {
       {/* Color display */}
       {colors && colors.length > 0 && (
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1.5">
+          <label className="block text-sm font-medium text-taupe-700 mb-1.5">
             Color
           </label>
           <div className="flex flex-wrap gap-2">
             {colors.map((color) => (
               <span
                 key={color}
-                className="inline-flex items-center gap-1.5 text-sm text-stone-700 bg-stone-100 px-3 py-1.5 rounded-full"
+                className="inline-flex items-center gap-1.5 text-sm text-taupe-700 bg-taupe-100 px-3 py-1.5 rounded-full"
               >
                 <span
-                  className="w-3 h-3 rounded-full border border-stone-300"
+                  className="w-3 h-3 rounded-full border border-taupe-300"
                   style={{ backgroundColor: color.toLowerCase().replace(/\s+/g, "") }}
                 />
                 {color}
@@ -79,25 +79,25 @@ export default function AddToCartButton({ product, lengths, colors }: Props) {
 
       {/* Quantity selector */}
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1.5">
+        <label className="block text-sm font-medium text-taupe-700 mb-1.5">
           Quantity
         </label>
-        <div className="inline-flex items-center border border-stone-300 rounded-md">
+        <div className="inline-flex items-center border border-taupe-300 rounded-sm">
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            className="px-3 py-2 text-stone-600 hover:bg-stone-100 transition-colors"
+            className="px-3 py-2 text-taupe-600 hover:bg-taupe-100 transition-colors"
             aria-label="Decrease quantity"
           >
             −
           </button>
-          <span className="px-4 py-2 text-stone-900 font-medium min-w-[3rem] text-center border-x border-stone-300">
+          <span className="px-4 py-2 text-taupe-900 font-medium min-w-[3rem] text-center border-x border-taupe-300">
             {quantity}
           </span>
           <button
             type="button"
             onClick={() => setQuantity((q) => q + 1)}
-            className="px-3 py-2 text-stone-600 hover:bg-stone-100 transition-colors"
+            className="px-3 py-2 text-taupe-600 hover:bg-taupe-100 transition-colors"
             aria-label="Increase quantity"
           >
             +
@@ -109,7 +109,7 @@ export default function AddToCartButton({ product, lengths, colors }: Props) {
       <button
         onClick={handleClick}
         disabled={added}
-        className="w-full bg-stone-800 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-stone-700 transition-colors disabled:bg-green-700"
+        className="w-full bg-taupe-400 text-white px-8 py-3 rounded-sm text-lg font-medium hover:bg-taupe-500 transition-colors disabled:bg-green-700"
       >
         {added ? "Added ✓" : `Add to Cart — $${(product.price * quantity).toFixed(2)}`}
       </button>

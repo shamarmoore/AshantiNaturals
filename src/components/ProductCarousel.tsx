@@ -83,18 +83,18 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mb-2">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-taupe-900 mb-2">
               Featured Products
             </h2>
-            <p className="text-stone-600">Hand-picked favorites our customers love</p>
+            <p className="text-taupe-600">Hand-picked favorites our customers love</p>
           </div>
           <div className="hidden sm:flex gap-2">
             <button
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
               aria-label="Scroll left"
-              className="p-2.5 rounded-full border border-stone-300 text-stone-600 transition-all duration-200
-                         hover:bg-amber-50 hover:border-amber-400 hover:text-amber-700
+              className="p-2.5 rounded-full border border-taupe-300 text-taupe-600 transition-all duration-200
+                         hover:bg-blush-50 hover:border-blush-400 hover:text-blush-700
                          disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -105,8 +105,8 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
               aria-label="Scroll right"
-              className="p-2.5 rounded-full border border-stone-300 text-stone-600 transition-all duration-200
-                         hover:bg-amber-50 hover:border-amber-400 hover:text-amber-700
+              className="p-2.5 rounded-full border border-taupe-300 text-taupe-600 transition-all duration-200
+                         hover:bg-blush-50 hover:border-blush-400 hover:text-blush-700
                          disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -130,11 +130,11 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
               data-card
               className="group flex-shrink-0 snap-start
                          w-[calc(100%-16px)] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]
-                         bg-white rounded-xl border border-stone-200 overflow-hidden
-                         transition-all duration-300 hover:shadow-lg hover:border-amber-300"
+                         bg-white rounded-xl border border-taupe-200 overflow-hidden
+                         transition-all duration-300 hover:shadow-lg hover:border-blush-300"
             >
-              <div className="aspect-square bg-stone-100 relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-stone-300">
+              <div className="aspect-square bg-taupe-100 relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center text-taupe-300">
                   <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1">
                     <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -151,15 +151,15 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
               </div>
               <div className="p-4">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-xs font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
+                  <span className="text-xs font-medium text-blush-700 bg-blush-50 px-2 py-0.5 rounded-full">
                     {product.category}
                   </span>
-                  <span className="text-xs text-stone-400">{product.texture}</span>
+                  <span className="text-xs text-taupe-400">{product.texture}</span>
                 </div>
-                <h3 className="font-semibold text-stone-900 group-hover:text-amber-800 transition-colors line-clamp-2 text-sm mb-2">
+                <h3 className="font-semibold text-taupe-900 group-hover:text-blush-800 transition-colors line-clamp-2 text-sm mb-2">
                   {product.name}
                 </h3>
-                <p className="text-lg font-bold text-stone-900">
+                <p className="text-lg font-bold text-taupe-900">
                   ${product.price.toFixed(2)}
                 </p>
               </div>
@@ -173,7 +173,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
             onClick={() => scroll("left")}
             disabled={!canScrollLeft}
             aria-label="Scroll left"
-            className="p-2 rounded-full border border-stone-300 text-stone-600
+            className="p-2 rounded-full border border-taupe-300 text-taupe-600
                        disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -184,7 +184,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
             onClick={() => scroll("right")}
             disabled={!canScrollRight}
             aria-label="Scroll right"
-            className="p-2 rounded-full border border-stone-300 text-stone-600
+            className="p-2 rounded-full border border-taupe-300 text-taupe-600
                        disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">

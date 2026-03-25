@@ -15,22 +15,22 @@ export default function ProductTabs({ description }: ProductTabsProps) {
   return (
     <div className="w-full">
       {/* Tab headers */}
-      <div className="flex border-b border-stone-200">
+      <div className="flex border-b border-taupe-200">
         {TABS.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`relative px-4 py-3 text-sm font-medium transition-colors sm:px-6 ${
               activeTab === tab
-                ? "text-amber-700"
-                : "text-stone-500 hover:text-stone-700"
+                ? "text-blush-700"
+                : "text-taupe-500 hover:text-taupe-700"
             }`}
             role="tab"
             aria-selected={activeTab === tab}
           >
             {tab}
             {activeTab === tab && (
-              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-amber-600" />
+              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-taupe-400" />
             )}
           </button>
         ))}
@@ -53,7 +53,7 @@ export default function ProductTabs({ description }: ProductTabsProps) {
 function DescriptionTab({ description }: { description: string }) {
   return (
     <div className="prose prose-stone max-w-none">
-      <p className="text-stone-700 leading-relaxed whitespace-pre-line">
+      <p className="text-taupe-700 leading-relaxed whitespace-pre-line">
         {description || "No description available."}
       </p>
     </div>
@@ -113,8 +113,8 @@ function CareInstructionsTab() {
       {sections.map((section) => (
         <div key={section.title}>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-amber-700">{section.icon}</span>
-            <h4 className="text-sm font-semibold text-stone-800">
+            <span className="text-blush-700">{section.icon}</span>
+            <h4 className="text-sm font-semibold text-taupe-800">
               {section.title}
             </h4>
           </div>
@@ -122,7 +122,7 @@ function CareInstructionsTab() {
             {section.items.map((item, i) => (
               <li
                 key={i}
-                className="text-sm text-stone-600 leading-relaxed list-disc"
+                className="text-sm text-taupe-600 leading-relaxed list-disc"
               >
                 {item}
               </li>
@@ -176,14 +176,14 @@ function ShippingInfoTab() {
       {sections.map((section) => (
         <div key={section.title}>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-amber-700">{section.icon}</span>
-            <h4 className="text-sm font-semibold text-stone-800">
+            <span className="text-blush-700">{section.icon}</span>
+            <h4 className="text-sm font-semibold text-taupe-800">
               {section.title}
             </h4>
           </div>
           <div className="ml-7">
             {section.content && (
-              <p className="text-sm text-stone-600 leading-relaxed">
+              <p className="text-sm text-taupe-600 leading-relaxed">
                 {section.content}
               </p>
             )}
@@ -191,10 +191,10 @@ function ShippingInfoTab() {
               <div className="space-y-2">
                 {section.items.map((item) => (
                   <div key={item.label} className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2">
-                    <span className="text-sm font-medium text-stone-700">
+                    <span className="text-sm font-medium text-taupe-700">
                       {item.label}:
                     </span>
-                    <span className="text-sm text-stone-500">
+                    <span className="text-sm text-taupe-500">
                       {item.detail}
                     </span>
                   </div>

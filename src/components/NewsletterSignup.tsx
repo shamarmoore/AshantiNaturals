@@ -36,19 +36,20 @@ export default function NewsletterSignup() {
   };
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-stone-800 via-stone-800 to-amber-900">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-taupe-400">
       <div className="max-w-3xl mx-auto text-center">
         {/* Decorative element */}
         <div className="flex justify-center mb-6">
-          <svg className="w-10 h-10 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+          <svg className="w-10 h-10 text-blush-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
           </svg>
         </div>
 
-        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">
-          Join the Ashanti Family
+        <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-white mb-3">
+          Join the Luméira Family
         </h2>
-        <p className="text-stone-300 mb-8 max-w-xl mx-auto leading-relaxed">
+        <div className="w-16 h-0.5 bg-blush-200 mx-auto mb-4" />
+        <p className="text-white/70 mb-8 max-w-xl mx-auto leading-relaxed">
           Subscribe for exclusive deals, new arrival alerts, styling tips, and early access to sales. 
           Be the first to know — straight to your inbox.
         </p>
@@ -64,7 +65,7 @@ export default function NewsletterSignup() {
             </p>
             <button
               onClick={() => setStatus("idle")}
-              className="mt-4 text-sm text-stone-400 hover:text-white underline transition-colors cursor-pointer"
+              className="mt-4 text-sm text-taupe-400 hover:text-white underline transition-colors cursor-pointer"
             >
               Subscribe another email
             </button>
@@ -85,24 +86,24 @@ export default function NewsletterSignup() {
                   }}
                   placeholder="Enter your email"
                   aria-label="Email address"
-                  className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white placeholder-stone-400
-                             focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent
+                  className={`w-full px-4 py-3 rounded-xl bg-white/15 border text-white placeholder-white/50
+                             focus:outline-none focus:ring-2 focus:ring-blush-200 focus:border-transparent
                              transition-all duration-200
-                             ${status === "error" ? "border-red-500" : "border-stone-600"}`}
+                             ${status === "error" ? "border-red-400" : "border-white/25"}`}
                   disabled={status === "loading"}
                 />
               </div>
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="px-6 py-3 bg-amber-600 text-white font-semibold rounded-xl
-                           hover:bg-amber-500 transition-all duration-200 shadow-lg hover:shadow-amber-600/25
+                className="px-6 py-3 bg-white text-taupe-800 font-semibold rounded-xl
+                           hover:bg-blush-100 transition-all duration-200 shadow-lg
                            disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer
                            flex items-center justify-center gap-2 min-w-[140px]"
               >
                 {status === "loading" ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-taupe-700 border-t-transparent rounded-full animate-spin" />
                     Signing up...
                   </>
                 ) : (
@@ -115,7 +116,7 @@ export default function NewsletterSignup() {
               <p className="text-red-400 text-sm mt-2 text-left">{errorMessage}</p>
             )}
 
-            <p className="text-stone-500 text-xs mt-4">
+            <p className="text-white/50 text-xs mt-4">
               No spam, ever. Unsubscribe anytime. We respect your privacy.
             </p>
           </form>

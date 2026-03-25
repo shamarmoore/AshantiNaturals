@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 interface Product {
@@ -24,6 +25,7 @@ export default function SearchBar({ className = "" }: SearchBarProps) {
   const [isLoading, setIsLoading] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const router = useRouter();
 
   // Fetch all products on mount
   useEffect(() => {
@@ -88,6 +90,13 @@ export default function SearchBar({ className = "" }: SearchBarProps) {
     debounceRef.current = setTimeout(() => filterProducts(value), 250);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && query.trim()) {
+      setIsOpen(false);
+      router.push(`/shop?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
   const handleResultClick = () => {
     setQuery("");
     setResults([]);
@@ -99,7 +108,7 @@ export default function SearchBar({ className = "" }: SearchBarProps) {
       <div className="relative">
         {/* Search icon */}
         <svg
-          className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400"
+          className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-taupe-400"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -115,11 +124,12 @@ export default function SearchBar({ className = "" }: SearchBarProps) {
           type="text"
           value={query}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           onFocus={() => {
             if (query.trim() && results.length > 0) setIsOpen(true);
           }}
           placeholder="Search products..."
-          className="w-full rounded-lg border border-stone-300 bg-white py-2 pl-10 pr-4 text-sm text-stone-800 placeholder-stone-400 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-colors"
+          className="w-full rounded-lg border border-taupe-300 bg-white py-2 pl-10 pr-4 text-sm text-taupe-800 placeholder-taupe-400 focus:border-blush-500 focus:outline-none focus:ring-1 focus:ring-blush-500 transition-colors"
           aria-label="Search products"
           aria-expanded={isOpen}
           role="combobox"
@@ -133,7 +143,7 @@ export default function SearchBar({ className = "" }: SearchBarProps) {
               setResults([]);
               setIsOpen(false);
             }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-taupe-400 hover:text-taupe-600 transition-colors"
             aria-label="Clear search"
           >
             <svg
@@ -158,12 +168,12 @@ export default function SearchBar({ className = "" }: SearchBarProps) {
         <div
           id="search-results"
           role="listbox"
-          className="absolute left-0 right-0 top-full z-50 mt-1 max-h-80 overflow-y-auto rounded-lg border border-stone-200 bg-white shadow-lg"
+          className="absolute left-0 right-0 top-full z-50 mt-1 max-h-80 overflow-y-auto rounded-lg border border-taupe-200 bg-white shadow-lg"
         >
           {isLoading ? (
-            <div className="px-4 py-3 text-sm text-stone-500">Loading...</div>
+            <div className="px-4 py-3 text-sm text-taupe-500">Loading...</div>
           ) : results.length === 0 ? (
-            <div className="px-4 py-3 text-sm text-stone-500">
+            <div className="px-4 py-3 text-sm text-taupe-500">
               No products found
             </div>
           ) : (
@@ -173,10 +183,10 @@ export default function SearchBar({ className = "" }: SearchBarProps) {
                   <Link
                     href={`/products/${product.id}`}
                     onClick={handleResultClick}
-                    className="flex items-center gap-3 px-4 py-2.5 hover:bg-stone-50 transition-colors"
+                    className="flex items-center gap-3 px-4 py-2.5 hover:bg-taupe-50 transition-colors"
                     role="option"
                   >
-                    <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-md bg-stone-100">
+                    <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-md bg-taupe-100">
                       {product.image ? (
                         <Image
                           src={product.image}
@@ -186,7 +196,7 @@ export default function SearchBar({ className = "" }: SearchBarProps) {
                           sizes="40px"
                         />
                       ) : (
-                        <div className="flex h-full w-full items-center justify-center text-stone-300">
+                        <div className="flex h-full w-full items-center justify-center text-taupe-300">
                           <svg
                             className="h-5 w-5"
                             fill="none"
@@ -204,14 +214,14 @@ export default function SearchBar({ className = "" }: SearchBarProps) {
                       )}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-stone-800">
+                      <p className="truncate text-sm font-medium text-taupe-800">
                         {product.name}
                       </p>
-                      <p className="text-xs text-stone-500">
+                      <p className="text-xs text-taupe-500">
                         {product.category}
                       </p>
                     </div>
-                    <span className="flex-shrink-0 text-sm font-semibold text-stone-900">
+                    <span className="flex-shrink-0 text-sm font-semibold text-taupe-900">
                       ${product.price.toFixed(2)}
                     </span>
                   </Link>
