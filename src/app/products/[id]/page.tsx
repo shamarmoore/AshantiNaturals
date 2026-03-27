@@ -244,8 +244,8 @@ export default async function ProductPage({
               />
             </div>
           ) : (
-            <p className="text-red-600 text-sm font-medium">
-              Currently Sold Out
+            <p className={`text-sm font-medium ${["wig", "lace front", "full lace"].includes(product.category.toLowerCase()) ? "text-blush-700" : "text-red-600"}`}>
+              {["wig", "lace front", "full lace"].includes(product.category.toLowerCase()) ? "Coming Soon" : "Currently Sold Out"}
             </p>
           )}
         </div>

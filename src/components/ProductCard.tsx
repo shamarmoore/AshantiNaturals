@@ -16,6 +16,11 @@ interface ProductCardProps {
   method?: string;
 }
 
+const WIG_CATEGORIES = ["wig", "lace front", "full lace"];
+function isWigCategory(cat: string): boolean {
+  return WIG_CATEGORIES.includes(cat.toLowerCase());
+}
+
 export default function ProductCard({
   id,
   name,
@@ -31,6 +36,9 @@ export default function ProductCard({
     if (!inStock) return;
     addToCart({ id, name, price, image });
   };
+
+  const isWig = isWigCategory(category);
+  const outOfStockLabel = isWig ? "Coming Soon" : "Sold Out";
 
   return (
     <Link href={`/products/${id}`} className="group block">
@@ -62,9 +70,9 @@ export default function ProductCard({
             </div>
           )}
           {!inStock && (
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <span className="bg-white text-taupe-800 px-3 py-1 rounded-full text-sm font-medium">
-                Sold Out
+            <div className={`absolute inset-0 flex items-center justify-center ${isWig ? "bg-black/30" : "bg-black/40"}`}>
+              <span className={`px-3 py-1 rounded-full text-sm font-medium ${isWig ? "bg-blush-600 text-white" : "bg-white text-taupe-800"}`}>
+                {outOfStockLabel}
               </span>
             </div>
           )}

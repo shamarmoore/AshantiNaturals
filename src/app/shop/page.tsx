@@ -449,6 +449,11 @@ function ShopPageContent() {
   );
 }
 
+const WIG_CATEGORIES = ["wig", "lace front", "full lace"];
+function isWigCategory(category: string): boolean {
+  return WIG_CATEGORIES.includes(category.toLowerCase());
+}
+
 function ProductCard({ product }: { product: Product }) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -460,6 +465,9 @@ function ProductCard({ product }: { product: Product }) {
       image: product.image,
     });
   };
+
+  const isWig = isWigCategory(product.category);
+  const outOfStockLabel = isWig ? "Coming Soon" : "Sold Out";
 
   return (
     <Link
@@ -494,11 +502,11 @@ function ProductCard({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* Sold Out overlay */}
+        {/* Sold Out / Coming Soon overlay */}
         {!product.inStock && (
-          <div className="absolute inset-0 flex items-center justify-center bg-taupe-900/60">
-            <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-taupe-800">
-              Sold Out
+          <div className={`absolute inset-0 flex items-center justify-center ${isWig ? "bg-taupe-800/50" : "bg-taupe-900/60"}`}>
+            <span className={`rounded-full px-3 py-1 text-xs font-semibold ${isWig ? "bg-blush-600 text-white" : "bg-white text-taupe-800"}`}>
+              {outOfStockLabel}
             </span>
           </div>
         )}
@@ -531,9 +539,9 @@ function ProductCard({ product }: { product: Product }) {
           <button
             onClick={handleAddToCart}
             disabled={!product.inStock}
-            className="w-full rounded-lg bg-taupe-700 px-3 py-2 text-xs font-medium text-white hover:bg-taupe-800 transition-colors disabled:cursor-not-allowed disabled:bg-taupe-300 disabled:text-taupe-500"
+            className={`w-full rounded-lg px-3 py-2 text-xs font-medium transition-colors ${!product.inStock && isWig ? "bg-blush-600 text-white cursor-default" : "bg-taupe-700 text-white hover:bg-taupe-800 disabled:cursor-not-allowed disabled:bg-taupe-300 disabled:text-taupe-500"}`}
           >
-            {product.inStock ? "Add to Cart" : "Sold Out"}
+            {product.inStock ? "Add to Cart" : outOfStockLabel}
           </button>
         </div>
       </div>
